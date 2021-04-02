@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
@@ -6,8 +6,10 @@ import * as ROUTES from '../constants/routes';
 import useUser from '../hooks/use-user';
 
 export default function Header() {
+  // Todo define user and firebase context first
+  //Find the provider and infer types ....
   const { user: loggedInUser } = useContext(UserContext);
-  const { user } = useUser(loggedInUser?.uid);
+  const { user } = useUser(loggedInUser!?.uid);
   const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
 
@@ -18,7 +20,11 @@ export default function Header() {
           <div className="text-gray-700 text-center flex items-center align-items cursor-pointer">
             <h1 className="flex justify-center w-full">
               <Link to={ROUTES.DASHBOARD} aria-label="Instagram logo">
-                <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12" />
+                <img
+                  src="/images/logo.png"
+                  alt="Instagram"
+                  className="mt-2·w-6/12"
+                />
               </Link>
             </h1>
           </div>
@@ -75,8 +81,13 @@ export default function Header() {
                   <Link to={`/p/${user?.username}`}>
                     <img
                       className="rounded-full h-8 w-8 flex"
-                      src={`/images/avatars/${user.username}.jpg`}
-                      alt={`${user?.username} profile`}
+                      src={`/images/avatars/${user?.username}.jpg`}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-0.png';
+                      }}
+                      alt=""
                     />
                   </Link>
                 </div>

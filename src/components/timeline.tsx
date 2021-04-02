@@ -5,6 +5,17 @@ import LoggedInUserContext from '../context/logged-in-user';
 import usePhotos from '../hooks/use-photos';
 import Post from './post';
 
+interface contentProp {
+  username: string;
+  imageSrc: string;
+  caption: string;
+  docId: string;
+  userLikedPhoto: boolean;
+  likes: any[];
+  comments: { comment: string; displayName: string }[];
+  dateCreated: number | Date;
+}
+
 export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
   const { photos } = usePhotos(user);
@@ -14,7 +25,9 @@ export default function Timeline() {
       {!photos ? (
         <Skeleton count={4} width={640} height={500} className="mb-5" />
       ) : (
-        photos.map((content) => <Post key={content.docId} content={content} />)
+        photos.map((content) => (
+          <Post key={content.docId} content={content as contentProp} />
+        ))
       )}
     </div>
   );

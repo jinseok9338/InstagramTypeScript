@@ -16,8 +16,8 @@ export default function Header({
     fullName,
     followers,
     following,
-    username: profileUsername
-  }
+    username: profileUsername,
+  },
 }) {
   const { user: loggedInUser } = useContext(UserContext);
   const { user } = useUser(loggedInUser?.uid);
@@ -27,14 +27,23 @@ export default function Header({
   const handleToggleFollow = async () => {
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
     setFollowerCount({
-      followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1
+      followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1,
     });
-    await toggleFollow(isFollowingProfile, user.docId, profileDocId, profileUserId, user.userId);
+    await toggleFollow(
+      isFollowingProfile,
+      user.docId,
+      profileDocId,
+      profileUserId,
+      user.userId
+    );
   };
 
   useEffect(() => {
     const isLoggedInUserFollowingProfile = async () => {
-      const isFollowing = await isUserFollowingProfile(user.username, profileUserId);
+      const isFollowing = await isUserFollowingProfile(
+        user.username,
+        profileUserId
+      );
       setIsFollowingProfile(!!isFollowing);
     };
 
@@ -51,12 +60,17 @@ export default function Header({
             className="rounded-full h-40 w-40 flex"
             alt={`${fullName} profile picture`}
             src={`/images/avatars/${profileUsername}.jpg`}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src =
+                'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-0.png';
+            }}
           />
         ) : (
           <img
             className="rounded-full h-40 w-40 flex"
-            alt={"Karl Hadwen's profile picture"}
-            src="/images/avatars/karl.jpg"
+            alt={`${fullName}'s profile picture`}
+            src=""
           />
         )}
       </div>
@@ -98,7 +112,9 @@ export default function Header({
           )}
         </div>
         <div className="container mt-4">
-          <p className="font-medium">{!fullName ? <Skeleton count={1} height={24} /> : fullName}</p>
+          <p className="font-medium">
+            {!fullName ? <Skeleton count={1} height={24} /> : fullName}
+          </p>
         </div>
       </div>
     </div>
@@ -115,6 +131,6 @@ Header.propTypes = {
     fullName: PropTypes.string,
     username: PropTypes.string,
     followers: PropTypes.array,
-    following: PropTypes.array
-  }).isRequired
+    following: PropTypes.array,
+  }).isRequired,
 };

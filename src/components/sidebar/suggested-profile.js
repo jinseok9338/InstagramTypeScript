@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { updateLoggedInUserFollowing, updateFollowedUserFollowers } from '../../services/firebase';
+import {
+  updateLoggedInUserFollowing,
+  updateFollowedUserFollowers,
+} from '../../services/firebase';
 
 export default function SuggestedProfile({
   profileDocId,
   username,
   profileId,
   userId,
-  loggedInUserDocId
+  loggedInUserDocId,
 }) {
   const [followed, setFollowed] = useState(false);
 
@@ -24,6 +27,11 @@ export default function SuggestedProfile({
         <img
           className="rounded-full w-8 flex mr-3"
           src={`/images/avatars/${username}.jpg`}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src =
+              'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-0.png';
+          }}
           alt=""
         />
         <Link to={`/p/${username}`}>
@@ -46,5 +54,5 @@ SuggestedProfile.propTypes = {
   username: PropTypes.string.isRequired,
   profileId: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
-  loggedInUserDocId: PropTypes.string.isRequired
+  loggedInUserDocId: PropTypes.string.isRequired,
 };

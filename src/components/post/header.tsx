@@ -2,7 +2,11 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function Header({ username }) {
+interface Proptypes {
+  username: string;
+}
+
+const Header: React.FC<Proptypes> = ({ username }) => {
   return (
     <div className="flex border-b border-gray-primary h-4 p-4 py-8">
       <div className="flex items-center">
@@ -17,8 +21,6 @@ export default function Header({ username }) {
       </div>
     </div>
   );
-}
-
-Header.propTypes = {
-  username: PropTypes.string.isRequired
 };
+
+export default Header;

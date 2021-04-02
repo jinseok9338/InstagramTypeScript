@@ -3,17 +3,37 @@ import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
 
-export default function AddComment({ docId, comments, setComments, commentInput }) {
+interface PropTypes {
+  docId: string;
+  comments: {
+    comment: string | undefined;
+    displayName: string | undefined;
+  }[];
+  setComments: React.Dispatch<
+    React.SetStateAction<
+      {
+        comment: string;
+        displayName: string;
+      }[]
+    >
+  >;
+  commentInput: React.RefObject<HTMLInputElement>;
+}
+
+const AddComment: React.FC<PropTypes> = ({
+  docId,
+  comments,
+  setComments,
+  commentInput,
+}) => {
   const [comment, setComment] = useState('');
   const { firebase, FieldValue } = useContext(FirebaseContext);
-  const {
-    user: { displayName }
-  } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
-  const handleSubmitComment = (event) => {
+  const handleSubmitComment = (event: React.SyntheticEvent) => {
     event.preventDefault();
-
-    setComments([...comments, { displayName, comment }]);
+    //@ts-ignore
+    setComments([...comments, { displayName: user.displayName, comment }]);
     setComment('');
 
     return firebase
@@ -21,7 +41,8 @@ export default function AddComment({ docId, comments, setComments, commentInput 
       .collection('photos')
       .doc(docId)
       .update({
-        comments: FieldValue.arrayUnion({ displayName, comment })
+        //@ts-ignore
+        comments: FieldValue.arrayUnion({ displayName, comment }),
       });
   };
 
@@ -31,7 +52,9 @@ export default function AddComment({ docId, comments, setComments, commentInput 
         className="flex justify-between pl-0 pr-5"
         method="POST"
         onSubmit={(event) =>
-          comment.length >= 1 ? handleSubmitComment(event) : event.preventDefault()
+          comment.length >= 1
+            ? handleSubmitComment(event)
+            : event.preventDefault()
         }
       >
         <input
@@ -46,7 +69,9 @@ export default function AddComment({ docId, comments, setComments, commentInput 
           ref={commentInput}
         />
         <button
-          className={`text-sm font-bold text-blue-medium ${!comment && 'opacity-25'}`}
+          className={`text-sm font-bold text-blue-medium ${
+            !comment && 'opacity-25'
+          }`}
           type="button"
           disabled={comment.length < 1}
           onClick={handleSubmitComment}
@@ -56,11 +81,6 @@ export default function AddComment({ docId, comments, setComments, commentInput 
       </form>
     </div>
   );
-}
-
-AddComment.propTypes = {
-  docId: PropTypes.string.isRequired,
-  comments: PropTypes.array.isRequired,
-  setComments: PropTypes.func.isRequired,
-  commentInput: PropTypes.object
 };
+
+export default AddComment;

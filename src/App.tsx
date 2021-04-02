@@ -1,9 +1,10 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import UserContext from './context/user';
 import useAuthListener from './hooks/use-auth-listener';
-
+// import { seedDatabase } from './seed';
+// import { firebase } from './lib/firebase';
 import ProtectedRoute from './helpers/protected-route';
 
 const Login = lazy(() => import('./pages/login'));
@@ -13,7 +14,11 @@ const Profile = lazy(() => import('./pages/profile'));
 const NotFound = lazy(() => import('./pages/not-found'));
 
 export default function App() {
-  const { user } = useAuthListener();
+  const user = useAuthListener();
+
+  // useEffect(() => {
+  //   seedDatabase(firebase);
+  // }, []);
 
   return (
     <UserContext.Provider value={{ user }}>

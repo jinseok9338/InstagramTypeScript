@@ -41,12 +41,7 @@
         "allowTaggedTemplates": true
       }
     ],
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
+  
     "no-console": 0,
     "import/prefer-default-export": 0,
     "import": 0,
@@ -71,7 +66,9 @@
       {
         "extensions": [
           ".js",
-          ".jsx"
+          ".jsx",
+          ".tsx",
+          ".ts"
         ]
       }
     ],
@@ -80,28 +77,15 @@
     "quotes": [
       2,
       "single",
+    
       {
         "avoidEscape": true,
         "allowTemplateLiterals": true
       }
-    ],
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "none",
-        "singleQuote": true,
-        "printWidth": 100
-      }
-    ],
-    "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/anchor-is-valid": [
-      "warn",
-      {
-        "aspects": [
-          "invalidHref"
-        ]
-      }
     ]
+
+
+   
   },
   "plugins": [
     "prettier",
