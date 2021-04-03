@@ -5,8 +5,24 @@ import Skeleton from 'react-loading-skeleton';
 import { getSuggestedProfiles } from '../../services/firebase';
 import SuggestedProfile from './suggested-profile';
 
-export default function Suggestions({ userId, following, loggedInUserDocId }) {
-  const [profiles, setProfiles] = useState(null);
+interface propTypes {
+  userId: string;
+  following: any[];
+  loggedInUserDocId: string;
+}
+
+interface profileType {
+  docId: string;
+  username?: string;
+  userId?: string;
+}
+
+const Suggestions: React.FC<propTypes> = ({
+  userId,
+  following,
+  loggedInUserDocId,
+}) => {
+  const [profiles, setProfiles] = useState((null as unknown) as profileType[]);
 
   useEffect(() => {
     async function suggestedProfiles() {
@@ -36,8 +52,8 @@ export default function Suggestions({ userId, following, loggedInUserDocId }) {
           <SuggestedProfile
             key={profile.docId}
             profileDocId={profile.docId}
-            username={profile.username}
-            profileId={profile.userId}
+            username={profile.username!}
+            profileId={profile.userId!}
             userId={userId}
             loggedInUserDocId={loggedInUserDocId}
           />
@@ -45,10 +61,4 @@ export default function Suggestions({ userId, following, loggedInUserDocId }) {
       </div>
     </div>
   ) : null;
-}
-
-Suggestions.propTypes = {
-  userId: PropTypes.string,
-  following: PropTypes.array,
-  loggedInUserDocId: PropTypes.string,
 };

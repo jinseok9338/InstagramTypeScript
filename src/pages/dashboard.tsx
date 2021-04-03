@@ -27,5 +27,5 @@ export default function Dashboard({ user: loggedInUser }) {
 }
 
 Dashboard.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };

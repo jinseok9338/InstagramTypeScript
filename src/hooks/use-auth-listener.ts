@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import FirebaseContext from '../context/firebase';
 
-export default function useAuthListener(): firebase.default.User | null {
+export default function useAuthListener(): firebase.default.User  {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem('authUser') as string)
   );

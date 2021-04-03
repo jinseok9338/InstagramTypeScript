@@ -1,9 +1,9 @@
 import firebase from 'firebase';
 import { useState, useEffect } from 'react';
-import { getPhotos, FirestoreDataType } from '../services/firebase';
+import { getPhotos, FirestoreDataType, photosWithUserDetailsType } from '../services/firebase';
 
 export default function usePhotos(user: FirestoreDataType | null) {
-  const [photos, setPhotos] = useState([{}]);
+  const [photos, setPhotos] = useState([{}] as photosWithUserDetailsType[]);
 
   useEffect(() => {
     async function getTimelinePhotos() {

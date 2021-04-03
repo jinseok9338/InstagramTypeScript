@@ -9,7 +9,7 @@ import Comments from './comments';
 export interface contentProp {
   content: {
     username: string;
-    imageSrc?: string;
+    imageSrc: string;
     caption: string;
     docId: string;
     userLikedPhoto: boolean;

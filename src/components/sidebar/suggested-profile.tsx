@@ -6,13 +6,21 @@ import {
   updateFollowedUserFollowers,
 } from '../../services/firebase';
 
-export default function SuggestedProfile({
+interface Proptypes {
+  profileDocId: string;
+  username: string;
+  profileId: string;
+  userId: string;
+  loggedInUserDocId: string;
+}
+
+const SuggestedProfile: React.FC<Proptypes> = ({
   profileDocId,
   username,
   profileId,
   userId,
   loggedInUserDocId,
-}) {
+}) => {
   const [followed, setFollowed] = useState(false);
 
   async function handleFollowUser() {
@@ -47,12 +55,6 @@ export default function SuggestedProfile({
       </button>
     </div>
   ) : null;
-}
-
-SuggestedProfile.propTypes = {
-  profileDocId: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  profileId: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
-  loggedInUserDocId: PropTypes.string.isRequired,
 };
+
+export default SuggestedProfile;

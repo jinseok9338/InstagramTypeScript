@@ -1,18 +1,29 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getUserByUsername } from '../services/firebase';
+import { FirestoreDataType, getUserByUsername } from '../services/firebase';
 import * as ROUTES from '../constants/routes';
 import Header from '../components/header';
 import UserProfile from '../components/profile';
 
-export default function Profile() {
-  const { username } = useParams();
-  const [user, setUser] = useState(null);
+interface userType {
+  docId: string;
+  dateCreated: number;
+  emailAddress: string;
+  followers: any[];
+  following: any[];
+  fullName: string;
+  userId: string;
+  username: string;
+}
+
+const Profile = () => {
+  const { username } = useParams<{ username: string }>();
+  const [user, setUser] = useState<userType>((null as unknown) as userType);
   const history = useHistory();
 
   useEffect(() => {
     async function checkUserExists() {
-      const [user] = await getUserByUsername(username);
+      const [user] = (await getUserByUsername(username)) as userType[];
       if (user?.userId) {
         setUser(user);
       } else {
@@ -31,4 +42,6 @@ export default function Profile() {
       </div>
     </div>
   ) : null;
-}
+};
+
+export default Profile;

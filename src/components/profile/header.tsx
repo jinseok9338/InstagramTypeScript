@@ -6,7 +6,21 @@ import useUser from '../../hooks/use-user';
 import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
 import UserContext from '../../context/user';
 
-export default function Header({
+interface PropTypes {
+  photosCount: number;
+  followerCount: number;
+  setFollowerCount: ({}) => void;
+  profile: {
+    docId: string;
+    userId: string;
+    fullName: string;
+    username: string;
+    followers: string[];
+    following: string[];
+  };
+}
+
+const Header: React.FC<PropTypes> = ({
   photosCount,
   followerCount,
   setFollowerCount,
@@ -18,7 +32,7 @@ export default function Header({
     following,
     username: profileUsername,
   },
-}) {
+}) => {
   const { user: loggedInUser } = useContext(UserContext);
   const { user } = useUser(loggedInUser?.uid);
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
@@ -119,18 +133,6 @@ export default function Header({
       </div>
     </div>
   );
-}
-
-Header.propTypes = {
-  photosCount: PropTypes.number.isRequired,
-  followerCount: PropTypes.number.isRequired,
-  setFollowerCount: PropTypes.func.isRequired,
-  profile: PropTypes.shape({
-    docId: PropTypes.string,
-    userId: PropTypes.string,
-    fullName: PropTypes.string,
-    username: PropTypes.string,
-    followers: PropTypes.array,
-    following: PropTypes.array,
-  }).isRequired,
 };
+
+export default Header;

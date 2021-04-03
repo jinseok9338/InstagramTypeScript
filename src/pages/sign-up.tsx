@@ -16,7 +16,7 @@ export default function SignUp() {
   const [error, setError] = useState('');
   const isInvalid = password === '' || emailAddress === '';
 
-  const handleSignUp = async (event) => {
+  const handleSignUp = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     const usernameExists = await doesUsernameExist(username);
@@ -28,25 +28,27 @@ export default function SignUp() {
 
         // authentication
         // -> emailAddress & password & username (displayName)
-        await createdUserResult.user.updateProfile({
-          displayName: username
-        });
+        if (createdUserResult.user != null) {
+          await createdUserResult.user.updateProfile({
+            displayName: username,
+          });
+          await firebase
+            .firestore()
+            .collection('users')
+            .add({
+              userId: createdUserResult.user.uid,
+              username: username.toLowerCase(),
+              fullName,
+              emailAddress: emailAddress.toLowerCase(),
+              following: ['2'],
+              followers: [],
+              dateCreated: Date.now(),
+            });
+
+          history.push(ROUTES.DASHBOARD);
+        }
 
         // firebase user collection (create a document)
-        await firebase
-          .firestore()
-          .collection('users')
-          .add({
-            userId: createdUserResult.user.uid,
-            username: username.toLowerCase(),
-            fullName,
-            emailAddress: emailAddress.toLowerCase(),
-            following: ['2'],
-            followers: [],
-            dateCreated: Date.now()
-          });
-
-        history.push(ROUTES.DASHBOARD);
       } catch (error) {
         setFullName('');
         setEmailAddress('');
@@ -66,12 +68,19 @@ export default function SignUp() {
   return (
     <div className="container flex mx-auto max-w-screen-md items-center h-screen">
       <div className="flex w-3/5">
-        <img src="/images/iphone-with-profile.jpg" alt="iPhone with Instagram app" />
+        <img
+          src="/images/iphone-with-profile.jpg"
+          alt="iPhone with Instagram app"
+        />
       </div>
       <div className="flex flex-col w-2/5">
         <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded">
           <h1 className="flex justify-center w-full">
-            <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12 mb-4" />
+            <img
+              src="/images/logo.png"
+              alt="Instagram"
+              className="mt-2 w-6/12 mb-4"
+            />
           </h1>
 
           {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
