@@ -6,7 +6,7 @@ import AddComment from './add-comment';
 export interface CommentsPropTypes {
   commentInput: RefObject<HTMLInputElement>;
   docId: string;
-  comments: { comment: string; displayName: string }[];
+  comments: { comment: string; displayName: string |null }[];
   posted: number | Date;
 }
 
@@ -39,6 +39,7 @@ const Comments = ({
         </p>
       </div>
       <AddComment
+        posted={posted}
         docId={docId}
         comments={comments}
         setComments={setComments}

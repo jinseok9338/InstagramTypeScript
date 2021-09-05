@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   updateLoggedInUserFollowing,
@@ -35,11 +34,7 @@ const SuggestedProfile: React.FC<Proptypes> = ({
         <img
           className="rounded-full w-8 flex mr-3"
           src={`/images/avatars/${username}.jpg`}
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src =
-              'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-0.png';
-          }}
+    
           alt=""
         />
         <Link to={`/p/${username}`}>

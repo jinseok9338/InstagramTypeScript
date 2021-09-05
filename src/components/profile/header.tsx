@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
+
 import { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
 import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
 import UserContext from '../../context/user';
 
-interface PropTypes {
+interface HeaderPropTypes {
   photosCount: number;
   followerCount: number;
-  setFollowerCount: ({}) => void;
+  setFollowerCount: ({ followerCount }: {followerCount:number}) => void;
   profile: {
     docId: string;
     userId: string;
@@ -20,7 +20,7 @@ interface PropTypes {
   };
 }
 
-const Header: React.FC<PropTypes> = ({
+const Header = ({
   photosCount,
   followerCount,
   setFollowerCount,
@@ -32,7 +32,7 @@ const Header: React.FC<PropTypes> = ({
     following,
     username: profileUsername,
   },
-}) => {
+}: HeaderPropTypes) => {
   const { user: loggedInUser } = useContext(UserContext);
   const { user } = useUser(loggedInUser?.uid);
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
@@ -74,11 +74,6 @@ const Header: React.FC<PropTypes> = ({
             className="rounded-full h-40 w-40 flex"
             alt={`${fullName} profile picture`}
             src={`/images/avatars/${profileUsername}.jpg`}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src =
-                'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-0.png';
-            }}
           />
         ) : (
           <img

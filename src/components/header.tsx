@@ -82,11 +82,7 @@ export default function Header() {
                     <img
                       className="rounded-full h-8 w-8 flex"
                       src={`/images/avatars/${user?.username}.jpg`}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-0.png';
-                      }}
+                  // Need to add fallback img 
                       alt=""
                     />
                   </Link>
