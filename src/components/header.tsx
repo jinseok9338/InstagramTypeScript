@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
@@ -7,9 +7,9 @@ import useUser from '../hooks/use-user';
 
 export default function Header() {
   // Todo define user and firebase context first
-  //Find the provider and infer types ....
+  // Find the provider and infer types ....
   const { user: loggedInUser } = useContext(UserContext);
-  const { user } = useUser(loggedInUser!?.uid);
+  const { user } = useUser(loggedInUser?.uid);
   const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
 

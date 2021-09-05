@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import UserContext from './context/user';
 import useAuthListener from './hooks/use-auth-listener';
-// import { seedDatabase } from './seed';
-// import { firebase } from './lib/firebase';
+ import { seedDatabase } from './seed';
+ import { firebase } from './lib/firebase';
 import ProtectedRoute from './helpers/protected-route';
 
 const Login = lazy(() => import('./pages/login'));
@@ -28,8 +28,8 @@ export default function App() {
             <Route path={ROUTES.LOGIN} component={Login} />
             <Route path={ROUTES.SIGN_UP} component={SignUp} />
             <Route path={ROUTES.PROFILE} component={Profile} />
-            <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
-              <Dashboard />
+            <ProtectedRoute user={user} path={ROUTES.DASHBOARD}>
+              <Dashboard user={user} />
             </ProtectedRoute>
             <Route component={NotFound} />
           </Switch>

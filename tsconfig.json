@@ -4,8 +4,10 @@
     "module": "esnext",
     "target": "ES6",
     "lib": [
-      "es6",
-      "dom"
+  "es5",
+  "es6",
+  "dom",
+  "dom.iterable"
     ],
     "sourceMap": true,
     "allowJs": true,
@@ -24,7 +26,7 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-  
+  "baseUrl": ".",
     "noEmit": true
   },
   "include": ["./src/**/*"],

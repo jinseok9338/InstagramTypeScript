@@ -1,15 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { cloneElement, JSXElementConstructor, ReactElement } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
-export default function ProtectedRoute({ user, children, ...rest }) {
+type ProtectedRouteProp = {
+  user: any;
+  children: ReactElement<any, string | JSXElementConstructor<any>>
+  path: string
+}
+
+export default function ProtectedRoute({ user, children, ...rest }: ProtectedRouteProp) {
   return (
     <Route
       {...rest}
       render={({ location }) => {
         if (user) {
-          return React.cloneElement(children, { user });
+          return cloneElement(children, { user });
         }
 
         if (!user) {
@@ -29,7 +34,3 @@ export default function ProtectedRoute({ user, children, ...rest }) {
   );
 }
 
-ProtectedRoute.propTypes = {
-  user: PropTypes.object,
-  children: PropTypes.object.isRequired
-};

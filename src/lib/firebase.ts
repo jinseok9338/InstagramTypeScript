@@ -5,6 +5,9 @@ import { firebaseConfig } from './firebaseConfig';
 
 const firebase = Firebase.initializeApp(firebaseConfig);
 
-const FieldValue = Firebase.firestore.FieldValue
 
-export { firebase, FieldValue };
+// We provide FieldValue for what?
+const { FieldValue, Firestore } = Firebase.firestore
+
+
+export { firebase, FieldValue, Firestore };

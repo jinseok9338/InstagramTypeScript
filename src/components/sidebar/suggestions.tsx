@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React,{ useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { getSuggestedProfiles } from '../../services/firebase';
 import SuggestedProfile from './suggested-profile';
@@ -22,7 +21,7 @@ const Suggestions: React.FC<propTypes> = ({
   following,
   loggedInUserDocId,
 }) => {
-  const [profiles, setProfiles] = useState((null as unknown) as profileType[]);
+  const [profiles, setProfiles] = useState();
 
   useEffect(() => {
     async function suggestedProfiles() {
@@ -52,8 +51,8 @@ const Suggestions: React.FC<propTypes> = ({
           <SuggestedProfile
             key={profile.docId}
             profileDocId={profile.docId}
-            username={profile.username!}
-            profileId={profile.userId!}
+            username={profile.username}
+            profileId={profile.userId}
             userId={userId}
             loggedInUserDocId={loggedInUserDocId}
           />
@@ -62,3 +61,5 @@ const Suggestions: React.FC<propTypes> = ({
     </div>
   ) : null;
 };
+
+export default Suggestions

@@ -10,12 +10,12 @@ interface propTypes {
   handleFocus: () => void;
 }
 
-const Actions: React.FC<propTypes> = ({
+const Actions = ({
   docId,
   totalLikes,
   likedPhoto,
   handleFocus,
-}) => {
+}: propTypes) => {
   const {
     user: { uid: userId },
   } = useContext(UserContext);
@@ -32,9 +32,9 @@ const Actions: React.FC<propTypes> = ({
       .doc(docId)
       .update({
         likes: toggleLiked
-          ? //@ts-ignore //I am not usre how you can access static memebr in JavaScript
+          ? 
             FieldValue.arrayRemove(userId)
-          : //@ts-ignore //I am not usre how you can access static memebr in JavaScript
+          : 
             FieldValue.arrayUnion(userId),
       });
 

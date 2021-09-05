@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { FieldValue } from '../lib/firebase';
+import { FieldValue,firebase } from '../lib/firebase';
 
 interface FirebaseContextType {
-  firebase: firebase.default.app.App;
-  FieldValue: firebase.default.firestore.FieldValue;
+  firebase: typeof firebase;
+  FieldValue: typeof FieldValue
 }
 
 const FirebaseContext = createContext<FirebaseContextType>(

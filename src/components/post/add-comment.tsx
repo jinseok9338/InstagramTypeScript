@@ -1,39 +1,30 @@
-import { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
+import { Dispatch, FC, RefObject, SetStateAction, SyntheticEvent, useState, useContext } from 'react';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
+import { CommentsPropTypes } from './comments';
 
-interface PropTypes {
-  docId: string;
-  comments: {
-    comment: string | undefined;
-    displayName: string | undefined;
-  }[];
-  setComments: React.Dispatch<
-    React.SetStateAction<
-      {
-        comment: string;
-        displayName: string;
-      }[]
-    >
-  >;
-  commentInput: React.RefObject<HTMLInputElement>;
+interface AddCommentProptypes extends CommentsPropTypes{
+  setComments: React.Dispatch<React.SetStateAction<{
+    comment: string;
+    displayName: string | null;
+  }[]>>
 }
 
-const AddComment: React.FC<PropTypes> = ({
+const AddComment = ({
   docId,
   comments,
   setComments,
   commentInput,
-}) => {
+}: AddCommentProptypes):JSX.Element => {
   const [comment, setComment] = useState('');
   const { firebase, FieldValue } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
+  const { displayName } = user;
 
-  const handleSubmitComment = (event: React.SyntheticEvent) => {
+  const handleSubmitComment = (event:SyntheticEvent) => {
     event.preventDefault();
-    //@ts-ignore
-    setComments([...comments, { displayName: user.displayName, comment }]);
+ 
+    setComments([...comments, { displayName, comment }]);
     setComment('');
 
     return firebase
@@ -41,8 +32,8 @@ const AddComment: React.FC<PropTypes> = ({
       .collection('photos')
       .doc(docId)
       .update({
-        //@ts-ignore
-        comments: FieldValue.arrayUnion({ displayName, comment }),
+    
+        comments: FieldValue.arrayUnion({ displayName , comment }),
       });
   };
 

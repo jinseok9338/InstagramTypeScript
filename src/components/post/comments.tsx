@@ -1,22 +1,21 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { FC, RefObject, useState } from 'react';
 import { formatDistance } from 'date-fns';
 import { Link } from 'react-router-dom';
 import AddComment from './add-comment';
 
-interface PropTypes {
-  commentInput: React.RefObject<HTMLInputElement>;
+export interface CommentsPropTypes {
+  commentInput: RefObject<HTMLInputElement>;
   docId: string;
   comments: { comment: string; displayName: string }[];
   posted: number | Date;
 }
 
-const Comments: React.FC<PropTypes> = ({
+const Comments = ({
   docId,
   comments: allComments,
   posted,
   commentInput,
-}) => {
+}: CommentsPropTypes) => {
   const [comments, setComments] = useState(allComments);
 
   return (
