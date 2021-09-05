@@ -5,7 +5,7 @@ import {
   updateFollowedUserFollowers,
 } from '../../services/firebase';
 
-interface Proptypes {
+interface SuggestedProfileProptypes {
   profileDocId: string;
   username: string;
   profileId: string;
@@ -13,13 +13,13 @@ interface Proptypes {
   loggedInUserDocId: string;
 }
 
-const SuggestedProfile: React.FC<Proptypes> = ({
-  profileDocId,
+const SuggestedProfile = ({
+ profileDocId,
   username,
   profileId,
   userId,
   loggedInUserDocId,
-}) => {
+}: SuggestedProfileProptypes) => {
   const [followed, setFollowed] = useState(false);
 
   async function handleFollowUser() {
