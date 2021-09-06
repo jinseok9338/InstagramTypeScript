@@ -5,7 +5,7 @@ import * as ROUTES from '../constants/routes';
 import Header from '../components/header';
 import UserProfile from '../components/profile';
 
-//Who the fuck wrote this code... oh wait it's me... shit there are tons of works to do 
+//Who the fuck wrote this code... oh wait it's me... shit there are tons of works to do
 interface userType {
   docId: string;
   dateCreated: number;
@@ -19,7 +19,7 @@ interface userType {
 
 const Profile = () => {
   const { username } = useParams<{ username: string }>();
-  const [user, setUser] = useState<userType>((null as unknown) as userType);
+  const [user, setUser] = useState<userType>(null as unknown as userType);
   const history = useHistory();
 
   useEffect(() => {

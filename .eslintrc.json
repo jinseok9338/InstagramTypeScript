@@ -5,8 +5,7 @@
     "prettier/react",
     "plugin:jsx-a11y/recommended"
   ],
-  "parser": 
-    "@typescript-eslint/parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 8,
     "ecmaFeatures": {
@@ -16,8 +15,9 @@
     }
   },
   "globals": {
-      "React": true,
- "JSX": true
+    "React": true,
+    "JSX": true,
+    "firebase": true
   },
   "env": {
     "browser": true,
@@ -36,20 +36,17 @@
         "destructuring": "all"
       }
     ],
-    "arrow-body-style": [
-      2,
-      "as-needed"
-    ],
+    "arrow-body-style": [2, "as-needed"],
     "no-unused-expressions": [
       2,
       {
         "allowTaggedTemplates": true
       }
     ],
-  
+
     "no-console": 0,
     "import/prefer-default-export": 0,
-   
+
     "func-names": 0,
     "space-before-function-paren": 0,
     "comma-dangle": 0,
@@ -69,12 +66,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".tsx",
-          ".ts"
-        ]
+        "extensions": [".js", ".jsx", ".tsx", ".ts"]
       }
     ],
     "radix": 0,
@@ -82,31 +74,18 @@
     "quotes": [
       2,
       "single",
-    
+
       {
         "avoidEscape": true,
         "allowTemplateLiterals": true
       }
     ]
-
-
-   
   },
-  "plugins": [
-      "@typescript-eslint",
-    "prettier",
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks"],
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }

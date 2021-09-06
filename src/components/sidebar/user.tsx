@@ -1,14 +1,13 @@
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 
-interface PropTypes {
+interface UserPropTypes {
   username: string;
   fullName: string;
 }
 
-const User: React.FC<PropTypes> = ({ username, fullName }) => {
-  return !username || !fullName ? (
+const User = ({ username, fullName }: UserPropTypes):JSX.Element => 
+  !username || !fullName ? (
     <Skeleton count={1} height={61} />
   ) : (
     <Link
@@ -19,11 +18,6 @@ const User: React.FC<PropTypes> = ({ username, fullName }) => {
         <img
           className="rounded-full w-16 flex mr-3"
           src={`/images/avatars/${username}.jpg`}
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src =
-              'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-0.png';
-          }}
           alt=""
         />
       </div>
@@ -33,6 +27,6 @@ const User: React.FC<PropTypes> = ({ username, fullName }) => {
       </div>
     </Link>
   );
-};
+
 
 export default User;

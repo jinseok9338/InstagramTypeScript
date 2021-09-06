@@ -9,7 +9,7 @@ import UserContext from '../../context/user';
 interface HeaderPropTypes {
   photosCount: number;
   followerCount: number;
-  setFollowerCount: ({ followerCount }: {followerCount:number}) => void;
+  setFollowerCount: ({ followerCount }: { followerCount: number }) => void;
   profile: {
     docId: string;
     userId: string;

@@ -4,24 +4,24 @@ import Skeleton from 'react-loading-skeleton';
 import { getSuggestedProfiles } from '../../services/firebase';
 import SuggestedProfile from './suggested-profile';
 
-interface propTypes {
+interface SuggestionPropTypes {
   userId: string;
   following: any[];
   loggedInUserDocId: string;
 }
 
-interface profileType {
-  docId: string;
-  username?: string;
-  userId?: string;
-}
 
-const Suggestions: React.FC<propTypes> = ({
+const Suggestions = ({
   userId,
   following,
   loggedInUserDocId,
-}) => {
-  const [profiles, setProfiles] = useState();
+}: SuggestionPropTypes) => {
+  type profileType = {
+    docId: string;
+    username?: string;
+    userId?: string;
+  }[]
+  const [profiles, setProfiles] = useState({} as profileType); // Need to provide default value or type
 
   useEffect(() => {
     async function suggestedProfiles() {
@@ -49,10 +49,10 @@ const Suggestions: React.FC<propTypes> = ({
       <div className="mt-4 grid gap-5">
         {profiles.map((profile) => (
           <SuggestedProfile
-            key={profile.docId}
+            key={profile?.docId}
             profileDocId={profile.docId}
-            username={profile.username}
-            profileId={profile.userId}
+            username={profile.username? profile.username : 'unknown' } // Profile may contain username
+            profileId={profile.userId? profile.userId : 'unknown'}
             userId={userId}
             loggedInUserDocId={loggedInUserDocId}
           />
@@ -62,4 +62,4 @@ const Suggestions: React.FC<propTypes> = ({
   ) : null;
 };
 
-export default Suggestions
+export default Suggestions;

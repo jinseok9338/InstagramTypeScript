@@ -4,11 +4,15 @@ import * as ROUTES from '../constants/routes';
 
 type ProtectedRouteProp = {
   user: any;
-  children: ReactElement<any, string | JSXElementConstructor<any>>
-  path: string
-}
+  children: ReactElement<any, string | JSXElementConstructor<any>>;
+  path: string;
+};
 
-export default function ProtectedRoute({ user, children, ...rest }: ProtectedRouteProp) {
+export default function ProtectedRoute({
+  user,
+  children,
+  ...rest
+}: ProtectedRouteProp) {
   return (
     <Route
       {...rest}
@@ -22,7 +26,7 @@ export default function ProtectedRoute({ user, children, ...rest }: ProtectedRou
             <Redirect
               to={{
                 pathname: ROUTES.LOGIN,
-                state: { from: location }
+                state: { from: location },
               }}
             />
           );
@@ -33,4 +37,3 @@ export default function ProtectedRoute({ user, children, ...rest }: ProtectedRou
     />
   );
 }
-

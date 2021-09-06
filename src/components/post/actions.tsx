@@ -10,12 +10,7 @@ interface propTypes {
   handleFocus: () => void;
 }
 
-const Actions = ({
-  docId,
-  totalLikes,
-  likedPhoto,
-  handleFocus,
-}: propTypes) => {
+const Actions = ({ docId, totalLikes, likedPhoto, handleFocus }: propTypes) => {
   const {
     user: { uid: userId },
   } = useContext(UserContext);
@@ -32,10 +27,8 @@ const Actions = ({
       .doc(docId)
       .update({
         likes: toggleLiked
-          ? 
-            FieldValue.arrayRemove(userId)
-          : 
-            FieldValue.arrayUnion(userId),
+          ? FieldValue.arrayRemove(userId)
+          : FieldValue.arrayUnion(userId),
       });
 
     setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1));

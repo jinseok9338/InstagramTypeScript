@@ -6,7 +6,7 @@ import AddComment from './add-comment';
 export interface CommentsPropTypes {
   commentInput: RefObject<HTMLInputElement>;
   docId: string;
-  comments: { comment: string; displayName: string |null }[];
+  comments: { comment: string; displayName: string | null }[];
   posted: number | Date;
 }
 

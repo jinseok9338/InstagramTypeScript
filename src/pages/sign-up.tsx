@@ -50,10 +50,14 @@ export default function SignUp() {
 
         // firebase user collection (create a document)
       } catch (error) {
-        setFullName('');
-        setEmailAddress('');
-        setPassword('');
-        setError(error.message);
+        let errorMessage = 'Failed to do something exceptional';
+        if (error instanceof Error) {
+          errorMessage = error.message;
+          setFullName('');
+          setEmailAddress('');
+          setPassword('');
+          setError(errorMessage);
+        }
       }
     } else {
       setUsername('');

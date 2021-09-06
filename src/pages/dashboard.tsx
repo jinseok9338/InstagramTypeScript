@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
+import { FirestoreDataType } from '../services/firebase';
 import Header from '../components/header';
 import Timeline from '../components/timeline';
 import Sidebar from '../components/sidebar';
 import useUser from '../hooks/use-user';
 import LoggedInUserContext from '../context/logged-in-user';
 
+interface UserContextType {
+  user: firebase.default.User
+}
 
-
-export default function Dashboard({ user: loggedInUser }) {
-  const { user } = useUser(loggedInUser.uid);
+export default function Dashboard({ user: loggedInUser }: UserContextType) {
+  const { user } = useUser(loggedInUser?.uid);
 
   useEffect(() => {
     document.title = 'Instagram';
@@ -26,5 +29,3 @@ export default function Dashboard({ user: loggedInUser }) {
     </LoggedInUserContext.Provider>
   );
 }
-
-

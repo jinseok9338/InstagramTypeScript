@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-interface Proptypes {
+interface HeaderProptypes {
   username: string;
 }
 
-const Header: React.FC<Proptypes> = ({ username }) => {
-  return (
+const Header = ({ username }: HeaderProptypes):JSX.Element => (
     <div className="flex border-b border-gray-primary h-4 p-4 py-8">
       <div className="flex items-center">
         <Link to={`/p/${username}`} className="flex items-center">
@@ -21,6 +19,5 @@ const Header: React.FC<Proptypes> = ({ username }) => {
       </div>
     </div>
   );
-};
 
 export default Header;

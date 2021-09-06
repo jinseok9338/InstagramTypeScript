@@ -3,12 +3,7 @@
     "outDir": "build/dist",
     "module": "esnext",
     "target": "ES6",
-    "lib": [
-  "es5",
-  "es6",
-  "dom",
-  "dom.iterable"
-    ],
+    "lib": ["es5", "es6", "dom", "dom.iterable"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react-jsx",
@@ -19,19 +14,17 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
-    "esModuleInterop":false,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-  "baseUrl": ".",
+    "baseUrl": ".",
     "noEmit": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"],
-  "types": [
-    "typePatches"
-  ]
+  "types": ["typePatches"]
 }

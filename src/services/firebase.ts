@@ -45,10 +45,16 @@ export async function getUserByUserId(
   return user;
 }
 
+type profileType = {
+  docId: string;
+  username?: string;
+  userId?: string;
+}[]
+
 export async function getSuggestedProfiles(
   userId: string,
   following: string[]
-) {
+): Promise<profileType> {
   const result = await firebase.firestore().collection('users').limit(10).get();
 
   return result.docs

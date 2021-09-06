@@ -20,9 +20,14 @@ export default function Login() {
       await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
       history.push(ROUTES.DASHBOARD);
     } catch (error) {
-      setEmailAddress('');
-      setPassword('');
-      setError(error.message);
+      let errorMessage = 'Failed to do something exceptional';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+        setEmailAddress('');
+        setPassword('');
+        setError(errorMessage);
+      }
+    
     }
   };
 
