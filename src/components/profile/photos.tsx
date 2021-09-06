@@ -2,7 +2,7 @@
 
 import Skeleton from 'react-loading-skeleton';
 
-interface propTypes {
+interface PhotospropTypes {
   photos: {
     docId: string;
     imageSrc: string;
@@ -12,8 +12,7 @@ interface propTypes {
   }[];
 }
 
-const Photos: React.FC<propTypes> = ({ photos }) => {
-  return (
+const Photos = ({ photos }: PhotospropTypes):JSX.Element => (
     <div className="h-16 border-t border-gray-primary mt-12 pt-4">
       <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
         {!photos ? (
@@ -69,5 +68,4 @@ const Photos: React.FC<propTypes> = ({ photos }) => {
         ))}
     </div>
   );
-};
 export default Photos;

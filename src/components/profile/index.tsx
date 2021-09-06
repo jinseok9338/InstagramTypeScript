@@ -1,10 +1,10 @@
 import { useReducer, useEffect } from 'react';
-import PropTypes from 'prop-types';
+
 import Header from './header';
 import Photos from './photos';
 import { getUserPhotosByUsername } from '../../services/firebase';
 
-export interface Proptypes {
+export interface ProfileProptypes {
   user: {
     dateCreated: number;
     emailAddress: string;
@@ -16,7 +16,7 @@ export interface Proptypes {
   };
 }
 
-const Profile: React.FC<Proptypes> = ({ user }) => {
+const Profile = ({ user }: ProfileProptypes):JSX.Element => {
   const reducer = (state: any, newState: any) => ({ ...state, ...newState });
   const initialState = {
     profile: {},

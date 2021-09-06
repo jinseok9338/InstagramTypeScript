@@ -1,13 +1,10 @@
-import PropTypes from 'prop-types';
-import React from 'react';
 
-interface PropsTypes {
+
+interface ImagePropsTypes {
   src: string;
   caption: string;
 }
 
-const Image: React.FC<PropsTypes> = ({ src, caption }) => {
-  return <img src={src} alt={caption} />;
-};
+const Image = ({ src, caption }: ImagePropsTypes) => <img src={src} alt={caption} />;
 
 export default Image;

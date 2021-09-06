@@ -1,5 +1,4 @@
-/* eslint-disable no-plusplus */
-// NOTE: replace 'NvPY9M9MzFTARQ6M816YAzDJxZ72' with your Firebase auth user id (can be taken from Firebase)
+
 export function seedDatabase(firebase: firebase.default.app.App) {
   const users = [
     {
@@ -41,12 +40,12 @@ export function seedDatabase(firebase: firebase.default.app.App) {
   ];
 
   // eslint-disable-next-line prefer-const
-  for (let k = 0; k < users.length; k++) {
+  for (let k = 0; k < users.length; k += 1) {
     firebase.firestore().collection('users').add(users[k]);
   }
 
   // eslint-disable-next-line prefer-const
-  for (let i = 1; i <= 5; ++i) {
+  for (let i = 1; i <= 5; i += 1) {
     firebase
       .firestore()
       .collection('photos')

@@ -1,4 +1,4 @@
-import React, { Key, useRef } from 'react';
+import { useRef } from 'react';
 
 import Header from './header';
 import Image from './image';
@@ -6,7 +6,7 @@ import Actions from './actions';
 import Footer from './footer';
 import Comments from './comments';
 
-export interface contentProp {
+export interface PostcontentProp {
   content: {
     username: string;
     imageSrc: string;
@@ -19,7 +19,7 @@ export interface contentProp {
   };
 }
 
-const Post: React.FC<contentProp> = ({ content }) => {
+const Post = ({ content }: PostcontentProp) => {
   const commentInput = useRef<HTMLInputElement>(null);
 
   const handleFocus = () => {
@@ -46,7 +46,7 @@ const Post: React.FC<contentProp> = ({ content }) => {
       <Footer caption={content.caption} username={content.username} />
       <Comments
         docId={content?.docId as string}
-        comments={content?.comments} //Array
+        comments={content?.comments} // Array
         posted={content.dateCreated} // TimeStamp
         commentInput={commentInput}
       />

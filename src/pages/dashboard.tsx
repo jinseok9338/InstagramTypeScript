@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { FirestoreDataType } from '../services/firebase';
 import Header from '../components/header';
 import Timeline from '../components/timeline';
 import Sidebar from '../components/sidebar';

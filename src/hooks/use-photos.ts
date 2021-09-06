@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+
 import { useState, useEffect } from 'react';
 import {
   getPhotos,
@@ -17,8 +17,7 @@ export default function usePhotos(user: FirestoreDataType | null) {
           user!.userId,
           user!.following
         );
-        // re-arrange array to be newest photos first by dateCreated
-        //@ts-ignore
+      
         followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
         setPhotos(followedUserPhotos);
       }
