@@ -6,13 +6,14 @@ import { firebase, FieldValue, Providers } from '../lib/firebase'
 
 export const SignInWithGoogle = async () => {
   const history = useHistory()
-  const { credential } = await firebase.auth().signInWithPopup(Providers.google);
-
+  const { user } = await firebase.auth().signInWithPopup(Providers.google);
+  const credential = await user?.getIdToken()
+  
   if (credential) {
     try {
       const requestParams = {
         provider: 'google',
-        accessToken: credential.accessToken,
+        accessToken: credential
       };
       const { data } = await axios
         .post<{ accessToken: string }>(`${apiBaseURL}/token`, requestParams);
@@ -21,7 +22,7 @@ export const SignInWithGoogle = async () => {
       history.push('/url-to-redirect');
     } catch (e) {
       console.log(e.message)
-      // Error hanlding logic
+      alert('Something Went Wrong Try again')
     }
   }
 }
