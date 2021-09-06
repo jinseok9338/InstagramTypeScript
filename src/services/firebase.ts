@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { firebase, FieldValue, Providers } from '../lib/firebase'
 
-
+// Need to refactor the firebase functions 
 
 export const SignInWithGoogle = async () => {
   const history = useHistory()
