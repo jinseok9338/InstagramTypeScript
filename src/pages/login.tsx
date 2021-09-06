@@ -89,6 +89,12 @@ export default function Login() {
               Sign up
             </Link>
           </p>
+          <p className="text-sm">
+            Or Sign Up With {` `}
+            <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium leading-8">
+              Google
+            </Link>
+          </p>
         </div>
       </div>
     </div>

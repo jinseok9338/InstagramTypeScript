@@ -1,4 +1,30 @@
-import { firebase, FieldValue } from '../lib/firebase';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { firebase, FieldValue, Providers } from '../lib/firebase'
+
+
+
+export const SignInWithGoogle = async () => {
+  const history = useHistory()
+  const { credential } = await firebase.auth().signInWithPopup(Providers.google);
+
+  if (credential) {
+    try {
+      const requestParams = {
+        provider: 'google',
+        accessToken: credential.accessToken,
+      };
+      const { data } = await axios
+        .post<{ accessToken: string }>(`${apiBaseURL}/token`, requestParams);
+
+      sessionStorage.setItem('accessToken', data.accessToken);
+      history.push('/url-to-redirect');
+    } catch (e) {
+      console.log(e.message)
+      // Error hanlding logic
+    }
+  }
+}
 
 export async function doesUsernameExist(username: string) {
   const result = await firebase
