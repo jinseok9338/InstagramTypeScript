@@ -46,7 +46,7 @@ export const seedDatabase = async (firebase: firebase.default.app.App) => {
 
   const theUserExist = async (emailAddress:string) => {
     firebase.firestore().collection('users').where('emailAddress', '==', emailAddress).get().then((res) => {
-      if (res.empty) {
+      if (!res) {
         return true
       }
     }).catch(() => 
