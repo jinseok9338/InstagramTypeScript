@@ -16,7 +16,7 @@ export interface ProfileProptypes {
   };
 }
 
-const Profile = ({ user }: ProfileProptypes):JSX.Element => {
+const Profile = ({ user }: ProfileProptypes): JSX.Element => {
   const reducer = (state: any, newState: any) => ({ ...state, ...newState });
   const initialState = {
     profile: {},

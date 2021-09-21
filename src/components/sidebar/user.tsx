@@ -6,7 +6,7 @@ interface UserPropTypes {
   fullName: string;
 }
 
-const User = ({ username, fullName }: UserPropTypes):JSX.Element => 
+const User = ({ username, fullName }: UserPropTypes): JSX.Element =>
   !username || !fullName ? (
     <Skeleton count={1} height={61} />
   ) : (
@@ -27,6 +27,5 @@ const User = ({ username, fullName }: UserPropTypes):JSX.Element =>
       </div>
     </Link>
   );
-
 
 export default User;

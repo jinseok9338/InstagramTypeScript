@@ -1,4 +1,3 @@
-
 export function seedDatabase(firebase: firebase.default.app.App) {
   const users = [
     {

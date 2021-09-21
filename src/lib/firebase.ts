@@ -6,8 +6,8 @@ import { firebaseConfig } from './firebaseConfig';
 const firebase = Firebase.initializeApp(firebaseConfig);
 
 export const Providers = {
-    google: new Firebase.auth.GoogleAuthProvider(),
-    facebook: new Firebase.auth.FacebookAuthProvider(),
+  google: new Firebase.auth.GoogleAuthProvider(),
+  facebook: new Firebase.auth.FacebookAuthProvider(),
 };
 
 const { FieldValue, Firestore } = Firebase.firestore;

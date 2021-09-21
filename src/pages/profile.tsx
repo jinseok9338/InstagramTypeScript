@@ -5,7 +5,6 @@ import * as ROUTES from '../constants/routes';
 import Header from '../components/header';
 import UserProfile from '../components/profile';
 
-
 interface userType {
   docId: string;
   dateCreated: number;

@@ -27,7 +27,6 @@ export default function Login() {
         setPassword('');
         setError(errorMessage);
       }
-    
     }
   };
 
@@ -91,7 +90,10 @@ export default function Login() {
           </p>
           <p className="text-sm">
             Or Sign Up With {` `}
-            <Link to={ROUTES.SIGN_UP} className="font-bold text-blue-medium leading-8">
+            <Link
+              to={ROUTES.SIGN_UP}
+              className="font-bold text-blue-medium leading-8"
+            >
               Google
             </Link>
           </p>

@@ -1,31 +1,25 @@
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { firebase, FieldValue, Providers } from '../lib/firebase'
+import { firebase, FieldValue, Providers } from '../lib/firebase';
 
-// Need to refactor the firebase functions 
+// Need to refactor the firebase functions
 
 export const SignInWithGoogle = async () => {
-  const history = useHistory()
+  const history = useHistory();
   const { user } = await firebase.auth().signInWithPopup(Providers.google);
-  const credential = await user?.getIdToken()
-  
+  const credential = await user?.getIdToken();
+
   if (credential) {
     try {
-      const requestParams = {
-        provider: 'google',
-        accessToken: credential
-      };
-      const { data } = await axios
-        .post<{ accessToken: string }>(`${apiBaseURL}/token`, requestParams);
-
-      sessionStorage.setItem('accessToken', data.accessToken);
-      history.push('/url-to-redirect');
+      history.push('/');
     } catch (e) {
-      console.log(e.message)
-      alert('Something Went Wrong Try again')
+      let errorMessage = 'Failed to log in';
+      if (e instanceof Error) {
+        errorMessage = e.message;
+        alert('Something Went Wrong Try again'); // Didin't I fix it??
+      }
     }
   }
-}
+};
 
 export async function doesUsernameExist(username: string) {
   const result = await firebase
@@ -76,7 +70,7 @@ type profileType = {
   docId: string;
   username?: string;
   userId?: string;
-}[]
+}[];
 
 export async function getSuggestedProfiles(
   userId: string,

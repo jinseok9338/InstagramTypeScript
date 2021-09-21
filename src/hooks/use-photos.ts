@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import {
   getPhotos,
@@ -17,7 +16,7 @@ export default function usePhotos(user: FirestoreDataType | null) {
           user!.userId,
           user!.following
         );
-      
+
         followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
         setPhotos(followedUserPhotos);
       }

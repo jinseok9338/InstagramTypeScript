@@ -15,7 +15,6 @@ const NotFound = lazy(() => import('./pages/not-found'));
 
 export default function App() {
   const user = useAuthListener();
-  
 
   // useEffect(() => {
   //   seedDatabase(firebase);

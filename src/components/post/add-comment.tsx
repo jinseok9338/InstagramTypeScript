@@ -1,8 +1,4 @@
-import {
-  SyntheticEvent,
-  useState,
-  useContext,
-} from 'react';
+import { SyntheticEvent, useState, useContext } from 'react';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
 import { CommentsPropTypes } from './comments';

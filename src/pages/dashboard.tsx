@@ -6,7 +6,7 @@ import useUser from '../hooks/use-user';
 import LoggedInUserContext from '../context/logged-in-user';
 
 interface UserContextType {
-  user: firebase.default.User
+  user: firebase.default.User;
 }
 
 export default function Dashboard({ user: loggedInUser }: UserContextType) {

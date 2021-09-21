@@ -10,7 +10,6 @@ interface SuggestionPropTypes {
   loggedInUserDocId: string;
 }
 
-
 const Suggestions = ({
   userId,
   following,
@@ -20,7 +19,7 @@ const Suggestions = ({
     docId: string;
     username?: string;
     userId?: string;
-  }[]
+  }[];
   const [profiles, setProfiles] = useState({} as profileType); // Need to provide default value or type
 
   useEffect(() => {
@@ -51,8 +50,8 @@ const Suggestions = ({
           <SuggestedProfile
             key={profile?.docId}
             profileDocId={profile.docId}
-            username={profile.username? profile.username : 'unknown' } // Profile may contain username
-            profileId={profile.userId? profile.userId : 'unknown'}
+            username={profile.username ? profile.username : 'unknown'} // Profile may contain username
+            profileId={profile.userId ? profile.userId : 'unknown'}
             userId={userId}
             loggedInUserDocId={loggedInUserDocId}
           />
