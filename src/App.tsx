@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import UserContext from './context/user';
 import useAuthListener from './hooks/use-auth-listener';
-// import { seedDatabase } from './seed';
-// import { firebase } from './lib/firebase';
+ import { seedDatabase } from './seed'; 
+ import { firebase } from './lib/firebase';
 import ProtectedRoute from './helpers/protected-route';
 
 const Login = lazy(() => import('./pages/login'));
@@ -16,9 +16,9 @@ const NotFound = lazy(() => import('./pages/not-found'));
 export default function App() {
   const user = useAuthListener();
 
-  // useEffect(() => {
-  //   seedDatabase(firebase);
-  // }, []);
+  useEffect(() => {
+     seedDatabase(firebase);
+   }, []);
 
   return (
     <UserContext.Provider value={{ user }}>

@@ -1,4 +1,4 @@
-export function seedDatabase(firebase: firebase.default.app.App) {
+export const seedDatabase = async(firebase: firebase.default.app.App) => {
   const users = [
     {
       userId: 'NvPY9M9MzFTARQ6M816YAzDJxZ72',
@@ -38,12 +38,21 @@ export function seedDatabase(firebase: firebase.default.app.App) {
     },
   ];
 
-  // eslint-disable-next-line prefer-const
-  for (let k = 0; k < users.length; k += 1) {
-    firebase.firestore().collection('users').add(users[k]);
-  }
+  // This code is ugly need to refactor this 
 
-  // eslint-disable-next-line prefer-const
+  // for (let k = 0; k < users.length; k += 1) {
+  //   firebase.firestore().collection('users').add(users[k]);
+  // }
+
+  users.forEach(async (user) => {
+
+    if ((await firebase.firestore().collection('users').where('emailAddress', '==', user.emailAddress).get()).empty) {
+      // Need to refactor this into 
+      const userResult = await firebase.firestore().collection('users').doc(user.emailAddress).set(user);
+      console.log(userResult)
+    }
+ })
+
   for (let i = 1; i <= 5; i += 1) {
     firebase
       .firestore()
