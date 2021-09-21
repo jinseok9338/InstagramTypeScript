@@ -1,4 +1,4 @@
-export const seedDatabase = async(firebase: firebase.default.app.App) => {
+export const seedDatabase = async (firebase: firebase.default.app.App) => {
   const users = [
     {
       userId: 'NvPY9M9MzFTARQ6M816YAzDJxZ72',
@@ -44,9 +44,19 @@ export const seedDatabase = async(firebase: firebase.default.app.App) => {
   //   firebase.firestore().collection('users').add(users[k]);
   // }
 
+  const theUserExist = async (emailAddress:string) => {
+    firebase.firestore().collection('users').where('emailAddress', '==', emailAddress).get().then((res) => {
+      if (res.empty) {
+        return true
+      }
+    }).catch(() => 
+       false
+    )
+  }
+
   users.forEach(async (user) => {
 
-    if ((await firebase.firestore().collection('users').where('emailAddress', '==', user.emailAddress).get()).empty) {
+    if(theUserExist(user.emailAddress)) {
       // Need to refactor this into 
       const userResult = await firebase.firestore().collection('users').doc(user.emailAddress).set(user);
       console.log(userResult)
