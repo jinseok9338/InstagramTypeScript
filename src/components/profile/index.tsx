@@ -2,7 +2,7 @@ import { useReducer, useEffect } from 'react';
 
 import Header from './header';
 import Photos from './photos';
-import { getUserPhotosByUsername } from '../../services/firebase';
+import { getUserPhotosByUsername } from '../../services/photos';
 
 export interface ProfileProptypes {
   user: {

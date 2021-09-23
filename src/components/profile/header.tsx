@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
-import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
+import { isUserFollowingProfile, toggleFollow } from '../../services/photos';
 import UserContext from '../../context/user';
 
 interface HeaderPropTypes {

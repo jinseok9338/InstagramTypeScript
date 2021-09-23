@@ -3,7 +3,7 @@ import {
   getPhotos,
   FirestoreDataType,
   photosWithUserDetailsType,
-} from '../services/firebase';
+} from '../services/photos';
 
 export default function usePhotos(user: FirestoreDataType | null) {
   const [photos, setPhotos] = useState([{}] as photosWithUserDetailsType[]);

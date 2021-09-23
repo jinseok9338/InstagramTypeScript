@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { FirestoreDataType } from '../services/firebase';
+import { FirestoreDataType } from '../services/photos';
 
 interface UserContextType {
   user: FirestoreDataType | null;

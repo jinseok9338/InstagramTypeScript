@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getUserByUserId, FirestoreDataType } from '../services/firebase';
+import { getUserByUserId, FirestoreDataType } from '../services/photos';
 
 export default function useUser(userId: string) {
   const [activeUser, setActiveUser] = useState({} as FirestoreDataType);

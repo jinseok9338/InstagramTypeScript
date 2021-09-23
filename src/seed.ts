@@ -37,30 +37,25 @@ export const seedDatabase = async (firebase: firebase.default.app.App) => {
       dateCreated: Date.now(),
     },
   ];
-
-  // This code is ugly need to refactor this 
-
-  // for (let k = 0; k < users.length; k += 1) {
-  //   firebase.firestore().collection('users').add(users[k]);
-  // }
-
-  const theUserExist = async (emailAddress:string) => {
-    firebase.firestore().collection('users').where('emailAddress', '==', emailAddress).get().then((res) => {
-      if (!res) {
-        return true
-      }
-    }).catch(() => 
-       false
+ // Need to refactor into another file 
+  const theUserExist = async (emailAddress: string): Promise<boolean> => (
+    firebase.firestore().collection('users').where('emailAddress', '==', emailAddress).get().then((res) => !!res
+    ).catch(() => false
     )
-  }
+  );
 
   users.forEach(async (user) => {
 
-    if(theUserExist(user.emailAddress)) {
-      // Need to refactor this into 
-      const userResult = await firebase.firestore().collection('users').doc(user.emailAddress).set(user);
-      console.log(userResult)
-    }
+    theUserExist(user.emailAddress).then((res) => {
+      if (res === true) {
+        firebase.firestore().collection('users').doc(user.emailAddress).set(user).then(() => {
+          console.log(`A new User with Address ${user.emailAddress} added to the database`)
+        }).catch((e) => {
+          console.log(e.message)
+        })
+     }
+   })
+   
  })
 
   for (let i = 1; i <= 5; i += 1) {

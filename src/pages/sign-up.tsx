@@ -2,7 +2,8 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
-import { doesUsernameExist } from '../services/firebase';
+import { doesUsernameExist } from '../services/users';
+
 
 export default function SignUp() {
   const history = useHistory();
@@ -12,7 +13,6 @@ export default function SignUp() {
   const [fullName, setFullName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
-
   const [error, setError] = useState('');
   const isInvalid = password === '' || emailAddress === '';
 
@@ -50,7 +50,7 @@ export default function SignUp() {
 
         // firebase user collection (create a document)
       } catch (error) {
-        let errorMessage = 'Failed to do something exceptional';
+        let errorMessage = 'Something Went Wrong Try again';
         if (error instanceof Error) {
           errorMessage = error.message;
           setFullName('');
