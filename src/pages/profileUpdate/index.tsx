@@ -1,7 +1,7 @@
 import { useState,  useEffect } from 'react';
-import { Link, RouteComponentProps, useHistory, useLocation } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
-import { AddUserToFirestore } from '../services/signInSignUp';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import * as ROUTES from '../../constants/routes';
+import { AddUserToFirestore } from '../../services/signInSignUp';
 
 
 interface stateType {
@@ -18,8 +18,13 @@ export default function SignUpWithProfileDetail() {
     const { username, fullName, emailAddress, password } = state
     const history = useHistory();
  
+
     const [error, setError] = useState('');
-    const isInvalid = password === '' || emailAddress === '';
+    const [residence, setResidence] =  useState('')
+    const [hobby, setHobby] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [aboutYou,setAboutYou] = useState('')
+
 
     const handleSignUp = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
@@ -65,11 +70,11 @@ export default function SignUpWithProfileDetail() {
 
                     <form onSubmit={handleSignUp} method="POST">
                         <input
-                            aria-label="Enter your username"
+                            aria-label="Enter your hobby"
                             type="text"
-                            placeholder="Username"
+                            placeholder="Hobby"
                             className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                             onChange={({ target }) => setUsername(target.value)}
+                            onChange={({ target }) => setResidence(target.value)}
                             value={username}
                         />
                         <input
@@ -77,7 +82,7 @@ export default function SignUpWithProfileDetail() {
                             type="text"
                             placeholder="Full name"
                             className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                             onChange={({ target }) => setFullName(target.value)}
+                            onChange={({ target }) => setHobby(target.value)}
                             value={fullName}
                         />
                         <input
@@ -85,7 +90,7 @@ export default function SignUpWithProfileDetail() {
                             type="text"
                             placeholder="Email address"
                             className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                             onChange={({ target }) => setEmailAddress(target.value)}
+                            onChange={({ target }) => setPhoneNumber(target.value)}
                             value={emailAddress}
                         />
                         <input
@@ -93,26 +98,17 @@ export default function SignUpWithProfileDetail() {
                             type="password"
                             placeholder="Password"
                             className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
-                             onChange={({ target }) => setPassword(target.value)}
+                            onChange={({ target }) => setAboutYou(target.value)}
                             value={password}
                         />
                         <button
-                            disabled={isInvalid}
+                            
                             type="submit"
-                            className={`bg-blue-medium text-white w-full rounded h-8 font-bold
-            ${isInvalid && 'opacity-50'}`}
+                            className="bg-blue-medium text-white w-full rounded h-8 font-bold"
                         >
                             Sign Up
                         </button>
                     </form>
-                </div>
-                <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
-                    <p className="text-sm">
-                        Have an account?{` `}
-                        <Link to={ROUTES.LOGIN} className="font-bold text-blue-medium">
-                            Login
-                        </Link>
-                    </p>
                 </div>
             </div>
         </div>
