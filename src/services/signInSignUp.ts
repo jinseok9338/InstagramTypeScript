@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { firebase, Providers } from '../lib/firebase';
+import { doesUsernameExist } from './users';
 
 
 export const SignInWithGoogle = async () => {
@@ -14,8 +15,49 @@ export const SignInWithGoogle = async () => {
             let errorMessage = 'Failed to log in';
             if (e instanceof Error) {
                 errorMessage = e.message;
-                alert('Something Went Wrong Try again'); // Didin't I fix it??
+                alert(errorMessage); 
             }
         }
     }
+};
+
+export const AddUserToFirestore = async (emailAddress: string, password: string, username: string, fullName: string) => {
+    
+    const usernameExists = await doesUsernameExist(username);
+    
+    if (!usernameExists.length) {
+        try {
+            const createdUserResult = await firebase
+                .auth()
+                .createUserWithEmailAndPassword(emailAddress, password);
+
+            if (createdUserResult.user != null) {
+                await createdUserResult.user.updateProfile({
+                    displayName: username,
+                });
+                await firebase
+                    .firestore()
+                    .collection('users')
+                    .doc(createdUserResult.user.uid)
+                    .set({
+                        userId: createdUserResult.user.uid,
+                        username: username.toLowerCase(),
+                        fullName,
+                        emailAddress: emailAddress.toLowerCase(),
+                        following: [],
+                        followers: [],
+                        dateCreated: Date.now(),
+                    });
+
+            }
+        }
+        catch (error) {
+            if (error instanceof Error) {
+                console.log(error.message)
+            }
+        }
+    }
+
+  
+    
 };

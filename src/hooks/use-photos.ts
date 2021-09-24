@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
+import { FirestoreDataType } from '../services/types';
 import {
   getPhotos,
-  FirestoreDataType,
   photosWithUserDetailsType,
 } from '../services/photos';
 

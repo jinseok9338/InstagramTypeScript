@@ -3,8 +3,9 @@
 import { useState, useEffect, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
-import { isUserFollowingProfile, toggleFollow } from '../../services/photos';
+
 import UserContext from '../../context/user';
+import { toggleFollow, isUserFollowingProfile } from '../../services/users';
 
 interface HeaderPropTypes {
   photosCount: number;

@@ -45,7 +45,7 @@ export default function SignUp() {
               dateCreated: Date.now(),
             });
 
-          history.push(ROUTES.DASHBOARD);
+          history.push(ROUTES.PROFILE_UPDATE);
         }
 
         // firebase user collection (create a document)
@@ -122,6 +122,7 @@ export default function SignUp() {
               onChange={({ target }) => setPassword(target.value)}
               value={password}
             />
+            <Link to={{ pathname: ROUTES.PROFILE_UPDATE, state: { username,fullName,password,emailAddress } }}>
             <button
               disabled={isInvalid}
               type="submit"
@@ -130,6 +131,7 @@ export default function SignUp() {
             >
               Sign Up
             </button>
+            </Link>
           </form>
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">

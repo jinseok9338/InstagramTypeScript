@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   updateLoggedInUserFollowing,
   updateFollowedUserFollowers,
-} from '../../services/photos';
+} from '../../services/users';
 
 interface SuggestedProfileProptypes {
   profileDocId: string;
