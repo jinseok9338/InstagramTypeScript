@@ -28,29 +28,34 @@ const Post = ({ content }: PostcontentProp) => {
     }
   };
 
+  console.log(Object.keys(content).length !== 0)
   // components
   // -> header, image, actions (like & comment icons), footer, comments
   return (
-    <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
-      <Header username={content?.username as string} />
-      <Image
-        src={content?.imageSrc as string}
-        caption={content?.caption as string}
-      />
-      <Actions
-        docId={content?.docId}
-        totalLikes={content?.likes.length}
-        likedPhoto={content.userLikedPhoto}
-        handleFocus={handleFocus}
-      />
-      <Footer caption={content.caption} username={content.username} />
-      <Comments
-        docId={content?.docId as string}
-        comments={content?.comments} // Array
-        posted={content.dateCreated} // TimeStamp
-        commentInput={commentInput}
-      />
-    </div>
+  <>
+    {
+        Object.keys(content).length !== 0 && <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
+    <Header username={content?.username as string} />
+    <Image
+      src={content?.imageSrc as string}
+      caption={content?.caption as string}
+    />
+    <Actions
+      docId={content?.docId}
+      totalLikes={content?.likes?.length}
+      likedPhoto={content?.userLikedPhoto}
+      handleFocus={handleFocus}
+    />
+    <Footer caption={content?.caption} username={content?.username} />
+    <Comments
+      docId={content?.docId as string}
+      comments={content?.comments} // Array
+      posted={content?.dateCreated} // TimeStamp
+      commentInput={commentInput}
+    />
+  </div>
+   }
+ </>
   );
 };
 export default Post;
