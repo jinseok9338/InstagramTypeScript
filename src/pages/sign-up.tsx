@@ -4,7 +4,6 @@ import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 import { doesUsernameExist } from '../services/users';
 
-
 export default function SignUp() {
   const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
@@ -122,15 +121,20 @@ export default function SignUp() {
               onChange={({ target }) => setPassword(target.value)}
               value={password}
             />
-            <Link to={{ pathname: ROUTES.PROFILE_UPDATE, state: { username,fullName,password,emailAddress } }}>
-            <button
-              disabled={isInvalid}
-              type="submit"
-              className={`bg-blue-medium text-white w-full rounded h-8 font-bold
-            ${isInvalid && 'opacity-50'}`}
+            <Link
+              to={{
+                pathname: ROUTES.PROFILE_UPDATE,
+                state: { username, fullName, password, emailAddress },
+              }}
             >
-              Sign Up
-            </button>
+              <button
+                disabled={isInvalid}
+                type="submit"
+                className={`bg-blue-medium text-white w-full rounded h-8 font-bold
+            ${isInvalid && 'opacity-50'}`}
+              >
+                Sign Up
+              </button>
             </Link>
           </form>
         </div>

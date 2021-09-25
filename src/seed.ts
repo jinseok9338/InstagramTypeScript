@@ -37,26 +37,35 @@ export const seedDatabase = async (firebase: firebase.default.app.App) => {
       dateCreated: Date.now(),
     },
   ];
- // Need to refactor into another file 
-  const theUserExist = async (emailAddress: string): Promise<boolean> => (
-    firebase.firestore().collection('users').where('emailAddress', '==', emailAddress).get().then((res) => !!res
-    ).catch(() => false
-    )
-  );
+  // Need to refactor into another file
+  const theUserExist = async (emailAddress: string): Promise<boolean> =>
+    firebase
+      .firestore()
+      .collection('users')
+      .where('emailAddress', '==', emailAddress)
+      .get()
+      .then((res) => !!res)
+      .catch(() => false);
 
   users.forEach(async (user) => {
-
     theUserExist(user.emailAddress).then((res) => {
       if (res === true) {
-        firebase.firestore().collection('users').doc(user.emailAddress).set(user).then(() => {
-          console.log(`A new User with Address ${user.emailAddress} added to the database`)
-        }).catch((e) => {
-          console.log(e.message)
-        })
-     }
-   })
-   
- })
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(user.emailAddress)
+          .set(user)
+          .then(() => {
+            console.log(
+              `A new User with Address ${user.emailAddress} added to the database`
+            );
+          })
+          .catch((e) => {
+            console.log(e.message);
+          });
+      }
+    });
+  });
 
   for (let i = 1; i <= 5; i += 1) {
     firebase
@@ -83,4 +92,4 @@ export const seedDatabase = async (firebase: firebase.default.app.App) => {
         dateCreated: Date.now(),
       });
   }
-}
+};

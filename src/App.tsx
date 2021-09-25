@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import UserContext from './context/user';
 import useAuthListener from './hooks/use-auth-listener';
-//  import { seedDatabase } from './seed'; 
+//  import { seedDatabase } from './seed';
 //  import { firebase } from './lib/firebase';
 import ProtectedRoute from './helpers/protected-route';
 

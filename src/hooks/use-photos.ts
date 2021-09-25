@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FirestoreDataType } from '../services/types';
-import {
-  getPhotos,
-  photosWithUserDetailsType,
-} from '../services/photos';
+import { getPhotos, photosWithUserDetailsType } from '../services/photos';
 
 export default function usePhotos(user: FirestoreDataType | null) {
   const [photos, setPhotos] = useState([{}] as photosWithUserDetailsType[]);

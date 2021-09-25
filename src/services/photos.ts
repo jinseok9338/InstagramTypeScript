@@ -18,8 +18,6 @@ export async function getSuggestedProfiles(
     );
 }
 
-
-
 export interface photosWithUserDetailsType extends FirestoreDataType {
   username: string;
   userLikedPhoto: boolean;
@@ -73,6 +71,3 @@ export async function getUserPhotosByUsername(username: string) {
     docId: item.id,
   }));
 }
-
-
-
