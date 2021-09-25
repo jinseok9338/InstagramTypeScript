@@ -28,7 +28,7 @@ const Post = ({ content }: PostcontentProp) => {
     }
   };
 
-  console.log(Object.keys(content).length !== 0)
+ 
   // components
   // -> header, image, actions (like & comment icons), footer, comments
   return (
