@@ -11,12 +11,11 @@ interface stateType {
   fullName: string;
   emailAddress: string;
   password: string;
-  userId: string;
 }
 
 export default function SignUpWithProfileDetail() {
   const { state } = useLocation<stateType>();
-  const { username, fullName, emailAddress, password, userId } = state;
+  const { username, fullName, emailAddress, password } = state;
   const history = useHistory();
 
   const [error, setError] = useState('');
