@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { firebase, Providers } from '../lib/firebase';
-import { doesUsernameExist } from './users';
+
 
 export const SignInWithGoogle = async () => {
   const history = useHistory();
@@ -26,9 +26,7 @@ export const AddUserToFirestore = async (
   username: string,
   fullName: string
 ) => {
-  const usernameExists = await doesUsernameExist(username);
-
-  if (!usernameExists.length) {
+  // The user is already validated before 
     try {
       const createdUserResult = await firebase
         .auth()
@@ -53,10 +51,12 @@ export const AddUserToFirestore = async (
           });
         return createdUserResult.user.uid;
       }
+      return null
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
+        return null
       }
-    }
-  }
+      return null
+    } 
 };

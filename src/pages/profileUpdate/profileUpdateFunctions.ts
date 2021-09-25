@@ -8,7 +8,9 @@ export const onChangePhoneNumber = (
   const isPhoneNumber = validatePhoneNumber(phoneNumber);
   if (isPhoneNumber) {
     setPhoneNumber(phoneNumber);
+    setError('');
   } else {
+    setPhoneNumber(phoneNumber);
     setError("It's not a phone Number");
   }
 };

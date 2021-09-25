@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import {  useHistory, useLocation } from 'react-router-dom';
 import { updateProfile } from '../../services/profiles';
 import * as ROUTES from '../../constants/routes';
 import { AddUserToFirestore } from '../../services/signInSignUp';
@@ -33,6 +34,7 @@ export default function SignUpWithProfileDetail() {
         username,
         fullName
       );
+      // There can be a case where there is no userId
       updateProfile({ residence, hobby, phoneNumber, aboutYou }, userId!);
 
       history.push(ROUTES.DASHBOARD);
@@ -52,29 +54,36 @@ export default function SignUpWithProfileDetail() {
   return (
     <div className="container flex mx-auto max-w-screen-md items-center h-screen">
       <div className="flex w-3/5">
+      
         <img
           src="/images/iphone-with-profile.jpg"
           alt="iPhone with Instagram app"
         />
+        
       </div>
       <div className="flex flex-col w-2/5">
         <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded">
-          <h1 className="flex justify-center w-full">
-            <img
-              src="/images/logo.png"
-              alt="Instagram"
-              className="mt-2 w-6/12 mb-4"
-            />
-          </h1>
+          <a href="/">
+            <h1 className="flex justify-center w-full">
+              <img
+                src="/images/logo.png"
+                alt="Instagram"
+                className="mt-2 w-6/12 mb-4"
+              />
+            </h1>
+          </a>
 
           {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
           <form onSubmit={handleSignUp} method="POST">
-            <PlaceAutoComplete residence={residence} setResidence={setResidence} />
+            <PlaceAutoComplete
+              residence={residence}
+              setResidence={setResidence}
+            />
             <input
               aria-label="Enter your hobby"
               type="text"
-              placeholder="Full name"
+              placeholder="Hobby"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
               onChange={({ target }) => setHobby(target.value)}
               value={hobby}
@@ -89,13 +98,12 @@ export default function SignUpWithProfileDetail() {
               }
               value={phoneNumber}
             />
-            <input
-              aria-label="Enter your password"
-              type="password"
-              placeholder="Password"
+            <textarea name="Text1" cols={40} rows={5}
+              aria-label="Introduce Yourself"
+              placeholder="Introduce yourself"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
               onChange={({ target }) => setAboutYou(target.value)}
-              value={password}
+              value={aboutYou}
             />
             <button
               type="submit"
