@@ -14,3 +14,9 @@ export const validatePhoneNumber = (phoneNumber: string) => {
 export const isValidPassword = (password: string) => {
   
 }
+
+ export const isFileImage =(file:File)=> {
+  const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+
+  return file && acceptedImageTypes.includes(file.type)
+}
