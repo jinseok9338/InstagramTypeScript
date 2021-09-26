@@ -8,6 +8,7 @@ import { isFileImage } from '../utils/utils';
 // This file handles profile related functions
 
 const storage = firebase.storage().ref()
+const Firestore = firebase.firestore()
 
 export async function getSuggestedProfiles(
   userId: string,
@@ -48,10 +49,10 @@ export const updateProfile = (
 };
 
 
-export const uploadPictureTotheBucket = (imageAsFile: File)  => {
+export const uploadPictureTotheBucket = (imageAsFile: File, userId:string)  => {
   // Need to check if the file is in jpeg, png format Either type is supported
 
-  if (imageAsFile === '' || !isFileImage(imageAsFile)) {
+  if (imageAsFile.toString() === '' || !isFileImage(imageAsFile)) {
     console.error(`not an image, the image file is a ${typeof (imageAsFile)}`)
   } 
     const uploadTask = storage.child(`/images/${imageAsFile.name}`).put(imageAsFile)
@@ -76,6 +77,12 @@ export const uploadPictureTotheBucket = (imageAsFile: File)  => {
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL:string) => {
         console.log('File available at', downloadURL);
+        Firestore.collection('users').doc(userId).update({ userProfilePic: downloadURL }).then(() => {
+          console.log('UploadSuccessFul')
+        }).catch(e => {
+          console.error(e)
+        })
+        
       });
     });
   
