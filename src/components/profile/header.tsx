@@ -74,13 +74,13 @@ const Header = ({
           <img
             className="rounded-full h-40 w-40 flex"
             alt={`${fullName} profile picture`}
-            src={`/images/avatars/${profileUsername}.jpg`}
+            src="/images/unknown.png"
           />
         ) : (
           <img
             className="rounded-full h-40 w-40 flex"
+            src="/images/unknown.png"
             alt={`${fullName}'s profile picture`}
-            src=""
           />
         )}
       </div>

@@ -81,7 +81,8 @@ export default function Header() {
                   <Link to={`/p/${user?.username}`}>
                     <img
                       className="rounded-full h-8 w-8 flex"
-                      src={`/images/avatars/${user?.username}.jpg`}
+                      //  TODO Need to change this to actual pic
+                      src='/images/unknown.png'
                       // Need to add fallback img
                       alt=""
                     />

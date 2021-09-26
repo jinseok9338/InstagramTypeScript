@@ -18,7 +18,7 @@ const User = ({ username, fullName }: UserPropTypes): JSX.Element =>
         <img
           className="rounded-full w-16 flex mr-3"
           src={`/images/avatars/${username}.jpg`}
-          alt=""
+          alt="/images/unknown.png"
         />
       </div>
       <div className="col-span-3">

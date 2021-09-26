@@ -11,11 +11,13 @@ const Header = ({ username }: HeaderProptypes): JSX.Element => (
       <Link to={`/p/${username}`} className="flex items-center">
         <img
           className="rounded-full h-8 w-8 flex mr-3"
-          src={`/images/avatars/${username}.jpg`}
+          // This is clearly wrong because the image path is not static
+          src='/images/unknown.png'
           onError={(e) => {
-            // solving by declaring... not very ideal since I touched node file 
-            e.target.onerror = null;
-            e.target.src = '/images/unknown.png';
+            // to solve the not having the type problem
+            let { onerror, src } = e.target as HTMLImageElement
+            onerror = null;
+            src = '/images/unknown.png';
           }}
           alt={`${username}'s profile picture`}
         />
