@@ -31,6 +31,9 @@ export default function Header() {
           <div className="text-gray-700 text-center flex items-center align-items">
             {user ? (
               <>
+                <Link to={ROUTES.DASHBOARD} aria-label="Add the picture">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 mr-6 text-black-light cursor-pointer" width="30" height="30" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
+                </Link>
                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                   <svg
                     className="w-8 mr-6 text-black-light cursor-pointer"
