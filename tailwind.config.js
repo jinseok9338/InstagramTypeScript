@@ -27,10 +27,15 @@ module.exports = {
         primary: '#ed4956',
       },
     },
-  },
-  variants: {
     extend: {
-      display: ['group-hover'],
+      backgroundImage: {
+        uploadImage: "url('upload.png')",
+      },
+    },
+    variants: {
+      extend: {
+        display: ['group-hover'],
+      },
     },
   },
 };

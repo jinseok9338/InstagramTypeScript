@@ -11,12 +11,24 @@ export const validatePhoneNumber = (phoneNumber: string) => {
   return regex.test(phoneNumber);
 };
 
-export const isValidPassword = (password: string) => {
-  
-}
+export const isValidPassword = (password: string) => {};
 
- export const isFileImage =(file:File)=> {
+export const isFileImage = (file: File) => {
   const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
 
-  return file && acceptedImageTypes.includes(file.type)
-}
+  return file && acceptedImageTypes.includes(file.type);
+};
+
+export const validateFile = (file: File) => {
+  const validTypes = [
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/gif',
+    'image/x-icon',
+  ];
+  if (validTypes.indexOf(file.type) === -1) {
+    return false;
+  }
+  return true;
+};

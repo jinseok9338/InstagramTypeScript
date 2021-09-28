@@ -1,3 +1,7 @@
 2021-09-28
 1. make modal with tailwind css
+// Header
+// Images Dorp down 
+// Write post section
+
 2. Refactor upload picture function
