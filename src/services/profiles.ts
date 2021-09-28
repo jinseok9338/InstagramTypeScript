@@ -4,11 +4,10 @@ import { FirestoreDataType, profileType } from './types';
 import { firebase } from '../lib/firebase';
 import { isFileImage } from '../utils/utils';
 
-
 // This file handles profile related functions
 
-const storage = firebase.storage().ref()
-const Firestore = firebase.firestore()
+const storage = firebase.storage().ref();
+const Firestore = firebase.firestore();
 
 export async function getSuggestedProfiles(
   userId: string,
@@ -47,6 +46,3 @@ export const updateProfile = (
       console.log(e.message);
     });
 };
-
-
-

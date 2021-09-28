@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-nested-ternary */
 import { useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import LoggedInUserContext from '../context/logged-in-user';
 import usePhotos from '../hooks/use-photos';
 import Post from './post';
+import PostPicModal from './postPicModal';
 
 interface contentProp {
   username: string;
@@ -29,6 +31,7 @@ export default function Timeline() {
           <Post key={content.docId} content={content as contentProp} />
         ))
       )}
+      <PostPicModal visible={true} />
     </div>
   );
 }

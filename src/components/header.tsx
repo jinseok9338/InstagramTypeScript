@@ -32,7 +32,15 @@ export default function Header() {
             {user ? (
               <>
                 <Link to={ROUTES.DASHBOARD} aria-label="Add the picture">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-8 mr-6 text-black-light cursor-pointer" width="30" height="30" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-8 mr-6 text-black-light cursor-pointer"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+                  </svg>
                 </Link>
                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                   <svg
@@ -85,7 +93,7 @@ export default function Header() {
                     <img
                       className="rounded-full h-8 w-8 flex"
                       //  TODO Need to change this to actual pic
-                      src='/images/unknown.png'
+                      src="/images/unknown.png"
                       // Need to add fallback img
                       alt=""
                     />

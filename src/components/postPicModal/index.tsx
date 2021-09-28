@@ -1,12 +1,12 @@
 // Need Container and Post page for the PostPicModal for the page.. I guess?? or just Modal
+// Make modal as dynamic container
+import UploadPicture from './UploadPicture';
 
-const PostPicModal = (visible: boolean) => (
-        <div
-            className={`overflow-auto \
+const PostPicModal = ({ visible }: { visible: boolean }) => (
+  <div
+    className={`overflow-auto \
               z-30 \
-              h-5/6 \
-              w-10/12 \
-              mx-auto \
+              object-contain\
               top-20 \
               p-6 \
               border \
@@ -15,7 +15,9 @@ const PostPicModal = (visible: boolean) => (
               text-left \
               fixed \
               ${visible ? 'visible' : 'invisible'}`}
-      > </div> 
-    )
+  >
+    <UploadPicture />{' '}
+  </div>
+);
 
-export default PostPicModal
+export default PostPicModal;

@@ -1,0 +1,3 @@
+2021-09-28
+1. make modal with tailwind css
+2. Refactor upload picture function

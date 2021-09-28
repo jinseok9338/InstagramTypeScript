@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect } from 'react';
-import {  useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { updateProfile } from '../../services/profiles';
 import * as ROUTES from '../../constants/routes';
 import { AddUserToFirestore } from '../../services/signInSignUp';
@@ -54,12 +54,10 @@ export default function SignUpWithProfileDetail() {
   return (
     <div className="container flex mx-auto max-w-screen-md items-center h-screen">
       <div className="flex w-3/5">
-      
         <img
           src="/images/iphone-with-profile.jpg"
           alt="iPhone with Instagram app"
         />
-        
       </div>
       <div className="flex flex-col w-2/5">
         <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded">
@@ -98,7 +96,10 @@ export default function SignUpWithProfileDetail() {
               }
               value={phoneNumber}
             />
-            <textarea name="Text1" cols={40} rows={5}
+            <textarea
+              name="Text1"
+              cols={40}
+              rows={5}
               aria-label="Introduce Yourself"
               placeholder="Introduce yourself"
               className="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"

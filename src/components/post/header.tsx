@@ -12,10 +12,10 @@ const Header = ({ username }: HeaderProptypes): JSX.Element => (
         <img
           className="rounded-full h-8 w-8 flex mr-3"
           // This is clearly wrong because the image path is not static
-          src='/images/unknown.png'
+          src="/images/unknown.png"
           onError={(e) => {
             // to solve the not having the type problem
-            let { onerror, src } = e.target as HTMLImageElement
+            let { onerror, src } = e.target as HTMLImageElement;
             onerror = null;
             src = '/images/unknown.png';
           }}

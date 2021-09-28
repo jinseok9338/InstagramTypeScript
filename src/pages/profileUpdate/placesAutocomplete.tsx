@@ -18,10 +18,11 @@ const PlaceAutoComplete = ({
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
-          <input 
+          <input
             {...getInputProps({
               placeholder: 'Search Places ...',
-              className: 'text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2',
+              className:
+                'text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2',
             })}
           />
           <div className="autocomplete-dropdown-container">
@@ -41,7 +42,7 @@ const PlaceAutoComplete = ({
                     style,
                   })}
                 >
-                  <span>{suggestion.description.slice(0,20)}</span>
+                  <span>{suggestion.description.slice(0, 20)}</span>
                 </div>
               );
             })}
