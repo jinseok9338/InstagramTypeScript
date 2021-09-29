@@ -27,6 +27,10 @@ module.exports = {
         primary: '#ed4956',
         background: '#FF8A8A'
       },
+      green:{
+        primary: "#10B981",
+        background:"#6EE7B7",
+      }
     },
     extend: {
       backgroundImage: {

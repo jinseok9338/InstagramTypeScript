@@ -4,20 +4,20 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import UploadPictureDropZone from './UploadPicture';
 
 interface PostPicModalProps {
-  visible: boolean
-  setVisible: Dispatch<SetStateAction<boolean>>
+  visible: boolean;
+  setVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const PostPicModal = ({ visible, setVisible }: PostPicModalProps) =>
-{
-  const [text, setText] = useState('')
+const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
+  const [text, setText] = useState('');
   return (
     <div
-      className={`fixed z-10 inset-0 overflow-y-auto ${visible ? 'visible' : 'invisible'}`}
+      className={`fixed z-10 inset-0 overflow-y-auto ${
+        visible ? 'visible' : 'invisible'
+      }`}
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
-
     >
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         {/* <!--
@@ -55,16 +55,16 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) =>
     --> */}
         <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
           <div className="bg-gray-primary px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div className="flex justify-center" >
+            <div className="flex justify-center">
               <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                 <UploadPictureDropZone />
 
                 <div className="mt-2">
                   <textarea
                     placeholder="what is on your mind?"
-                    className=" resize-none text-sm text-gray-500 w-full h-full border-black border-opacity-50 border-2"
+                    className=" resize-none text-sm w-full h-full border-green-background border-opacity-50 border-2 focus:outline-none"
                     onChange={(e) => {
-                      setText(e.target.value)
+                      setText(e.target.value);
                     }}
                   />
                 </div>
@@ -90,8 +90,7 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) =>
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 export default PostPicModal;

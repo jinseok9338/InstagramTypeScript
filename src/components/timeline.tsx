@@ -21,7 +21,7 @@ interface contentProp {
 export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
   const { photos } = usePhotos(user);
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true);
 
   return (
     <div className="container col-span-2">
@@ -32,7 +32,7 @@ export default function Timeline() {
           <Post key={content.docId} content={content as contentProp} />
         ))
       )}
-      <PostPicModal visible={visible} setVisible ={setVisible} />
+      <PostPicModal visible={visible} setVisible={setVisible} />
     </div>
   );
 }
