@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-nested-ternary */
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import LoggedInUserContext from '../context/logged-in-user';
 import usePhotos from '../hooks/use-photos';
@@ -21,6 +21,7 @@ interface contentProp {
 export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
   const { photos } = usePhotos(user);
+  const [visible, setVisible] = useState(false)
 
   return (
     <div className="container col-span-2">
@@ -31,7 +32,7 @@ export default function Timeline() {
           <Post key={content.docId} content={content as contentProp} />
         ))
       )}
-      <PostPicModal visible={true} />
+      <PostPicModal visible={visible} setVisible ={setVisible} />
     </div>
   );
 }

@@ -25,6 +25,7 @@ module.exports = {
       },
       red: {
         primary: '#ed4956',
+        background: '#FF8A8A'
       },
     },
     extend: {
