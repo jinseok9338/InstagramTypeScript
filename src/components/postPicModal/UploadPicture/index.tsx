@@ -37,7 +37,7 @@ const DropZone = () => {
 
 
   return (
-    <div className="-translate-y-full text-red-600 text-center bg-white">
+    <div className="-translate-y-full text-red-600 text-center bg-white cursor-pointer">
       <div
         {...getRootProps({ className: 'dropzone flex items-center justify-center m-0 h-32 w-800px border-4 border-green-primary border-dashed p-2' })} >
         <input {...getInputProps()} />
