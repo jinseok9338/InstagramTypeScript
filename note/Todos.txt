@@ -3,5 +3,7 @@
 // Header
 // Images Dorp down 
 // Write post section
+// Make it beautiful.
 
 2. Refactor upload picture function
+

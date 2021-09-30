@@ -2,66 +2,52 @@
 /* eslint-disable arrow-body-style */
 // https://blog.logrocket.com/create-a-drag-and-drop-component-with-react-dropzone/
 
-import { useState } from 'react';
-import { validateFile } from '../../../utils/utils';
+import { useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 
-const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
-  e.preventDefault();
-};
 
-const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-  e.preventDefault();
-};
-
-const dragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-  e.preventDefault();
-};
 
 const DropZone = () => {
-  const [selectedFiles, setSelectedFiles] = useState([] as File[]);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  interface FileType extends File {
-    invalid: boolean;
-  }
-
-  const handleFiles = (files: FileList) => {
-    for (let i = 0; i < files.length; i += 1) {
-      if (validateFile(files[i])) {
-        // add to an array so we can display the name of file
-        setSelectedFiles((prevArray) => [...prevArray, files[i]]);
-      } else {
-        // add a new property called invalid Fix it because adding custom property in File is crucial
-        const filesIndex = files[i] as FileType;
-        filesIndex.invalid = true;
-        // add to the same array so we can display the name of the file
-        setSelectedFiles((prevArray) => [...prevArray, files[i]]);
-        // set error message
-        setErrorMessage('File type not permitted');
-      }
+  const [files, setFiles] = useState([] as any);
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: 'image/*',
+    onDrop: acceptedFiles => {
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      })));
     }
-  };
+  });
 
-  const fileDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const { files } = e.dataTransfer;
-    if (files.length) {
-      handleFiles(files);
-    }
-  };
+  useEffect(() => () => {
+    // Make sure to revoke the data uris to avoid memory leaks
+    files.forEach((file:File) => URL.revokeObjectURL((file as any).preview));
+  }, [files]);
+
+  const thumbs = files.map((file:File) => (
+    <div className="" key={file.name}>
+      <div className="">
+        <img
+          src={(file as any).preview}
+          className=""
+          alt="This is ThumbNail"
+        />
+      </div>
+    </div>
+  ));
+
 
   return (
     <div className="-translate-y-full text-red-600 text-center bg-white">
       <div
-        className="flex items-center justify-center m-0 h-32 w-800px border-4 border-green-primary border-dashed p-2"
-        onDragOver={dragOver}
-        onDragEnter={dragEnter}
-        onDragLeave={dragLeave}
-        onDrop={fileDrop}
-      >
+        {...getRootProps({ className: 'dropzone flex items-center justify-center m-0 h-32 w-800px border-4 border-green-primary border-dashed p-2' })} >
+        <input {...getInputProps()} />
         <div className="text-center font-sans text-2xl">
           Drag & Drop Pictures Here
+          <em>(Only *.jpeg and *.png images will be accepted)</em>
         </div>
+        <aside className="">
+          {thumbs}
+        </aside>
       </div>
     </div>
   );
