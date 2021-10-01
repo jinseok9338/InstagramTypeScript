@@ -1,6 +1,10 @@
 import { firebase, FieldValue } from '../lib/firebase';
 import { FirestoreDataType } from './types';
 
+export const UpdateUserProfile = async(collectionPath:string,data: any,userId: string) => {
+  firebase.firestore().collection(collectionPath).doc(userId).update(data)
+}
+
 export async function doesUsernameExist(username: string) {
   const result = await firebase
     .firestore()

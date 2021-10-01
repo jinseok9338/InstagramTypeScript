@@ -36,7 +36,7 @@
         "destructuring": "all"
       }
     ],
-    "jsx-a11y/no-noninteractive-element-interactions":0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
     "arrow-body-style": [2, "as-needed"],
     "no-unused-expressions": [
       2,

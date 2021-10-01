@@ -13,7 +13,7 @@ module.exports = {
       white: '#ffffff',
       blue: {
         medium: '#005c98',
-        hover:"#00008B"
+        hover: '#00008B',
       },
       black: {
         light: '#262626',
@@ -26,12 +26,12 @@ module.exports = {
       },
       red: {
         primary: '#ed4956',
-        background: '#FF8A8A'
+        background: '#FF8A8A',
       },
-      green:{
-        primary: "#10B981",
-        background:"#6EE7B7",
-      }
+      green: {
+        primary: '#10B981',
+        background: '#6EE7B7',
+      },
     },
     extend: {
       backgroundImage: {
@@ -39,11 +39,11 @@ module.exports = {
       },
     },
     maxHeight: {
-      '0': '0',
+      0: '0',
       '1/4': '25%',
       '1/2': '50%',
       '3/4': '75%',
-      'full': '100%',
+      full: '100%',
     },
     variants: {
       extend: {

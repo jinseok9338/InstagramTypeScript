@@ -2,26 +2,13 @@
 import Firebase from 'firebase';
 import { isFileImage } from '../utils/utils';
 import { firebase } from '../lib/firebase';
-import { FirestoreDataType, profileType } from './types';
+import { FirestoreDataType, profilestype, profileType } from './types';
 import { getUserByUserId, getUserByUsername } from './users';
 // This file handles photo related functions
 
 const storage = firebase.storage().ref();
 const Firestore = firebase.firestore();
 
-export async function getSuggestedProfiles(
-  userId: string,
-  following: string[]
-): Promise<profileType> {
-  const result = await firebase.firestore().collection('users').limit(10).get();
-
-  return result.docs
-    .map((user) => ({ ...user.data(), docId: user.id }))
-    .filter(
-      (profile: FirestoreDataType) =>
-        profile.userId !== userId && !following.includes(profile.userId)
-    );
-}
 
 export interface photosWithUserDetailsType extends FirestoreDataType {
   username: string;
@@ -77,7 +64,7 @@ export async function getUserPhotosByUsername(username: string) {
   }));
 }
 
-export const uploadPictureTotheBucket = (imageAsFile: File, userId: string) => {
+export const uploadPictureTotheBucket = (imageAsFile: File, AddTotheFirestore:(T?:any)=>void) => {
   // Need to check if the file is in jpeg, png format Either type is supported
 
   if (imageAsFile.toString() === '' || !isFileImage(imageAsFile)) {
@@ -112,15 +99,7 @@ export const uploadPictureTotheBucket = (imageAsFile: File, userId: string) => {
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL: string) => {
         console.log('File available at', downloadURL);
         // Add to the firestore
-        Firestore.collection('users')
-          .doc(userId)
-          .update({ userProfilePic: downloadURL })
-          .then(() => {
-            console.log('UploadSuccessFul');
-          })
-          .catch((e: Error) => {
-            console.error(e.message);
-          });
+        AddTotheFirestore()
       });
     }
   );

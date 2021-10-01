@@ -1,6 +1,6 @@
 /* eslint-disable default-case */
 import Firebase from 'firebase';
-import { FirestoreDataType, profileType } from './types';
+import { FirestoreDataType, profilestype } from './types';
 import { firebase } from '../lib/firebase';
 import { isFileImage } from '../utils/utils';
 
@@ -9,19 +9,21 @@ import { isFileImage } from '../utils/utils';
 const storage = firebase.storage().ref();
 const Firestore = firebase.firestore();
 
-export async function getSuggestedProfiles(
-  userId: string,
-  following: string[]
-): Promise<profileType> {
-  const result = await firebase.firestore().collection('users').limit(10).get();
 
-  return result.docs
-    .map((user) => ({ ...user.data(), docId: user.id }))
-    .filter(
-      (profile: FirestoreDataType) =>
-        profile.userId !== userId && !following.includes(profile.userId)
-    );
-}
+
+// export async function getSuggestedProfiles(
+//   userId: string,
+//   following: string[]
+// ): Promise<profilestype> {
+//   const result = await firebase.firestore().collection('users').limit(10).get();
+
+//   return result.docs
+//     .map((user) => ({ ...user.data()}))
+//     .filter(
+//       (profile: FirestoreDataType) =>
+//         profile.userId !== userId && !following.includes(profile.userId)
+//     );
+// }
 
 export interface updatedProfileType {
   residence: string;
