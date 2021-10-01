@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import Preview from './preview';
 
 
 
@@ -36,17 +37,17 @@ const DropZone = () => {
   ));
 
 
+
+
   return (
-    <div className="-translate-y-full text-red-600 text-center bg-white cursor-pointer w-full">
+    <div className="-translate-y-full text-red-600 text-center bg-white cursor-pointer w-full h-full">
       <div
-        {...getRootProps({ className: 'dropzone flex items-center justify-center m-0 border-4 border-green-primary border-dashed p-2' })} >
+        {...getRootProps({ className: 'dropzone flex items-center justify-center m-0 border-4 border-green-primary border-dashed p-2 h-full ' })} >
         <input {...getInputProps()} />
         <div className="text-center font-sans text-2xl">
          <p>Drag and Drop Images</p>
         </div>
-        <aside className="">
-          {thumbs}
-        </aside>
+        <Preview thumbs={thumbs}/>
       </div>
     </div>
   );
@@ -54,9 +55,9 @@ const DropZone = () => {
 
 const UploadPictureDropZone = () => {
   return (
-    <>
+  
       <DropZone />
-    </>
+   
   );
 };
 

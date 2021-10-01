@@ -13,6 +13,7 @@ module.exports = {
       white: '#ffffff',
       blue: {
         medium: '#005c98',
+        hover:"#00008B"
       },
       black: {
         light: '#262626',
@@ -36,6 +37,13 @@ module.exports = {
       backgroundImage: {
         uploadImage: "url('upload.png')",
       },
+    },
+    maxHeight: {
+      '0': '0',
+      '1/4': '25%',
+      '1/2': '50%',
+      '3/4': '75%',
+      'full': '100%',
     },
     variants: {
       extend: {

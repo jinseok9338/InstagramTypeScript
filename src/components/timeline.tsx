@@ -24,6 +24,7 @@ export default function Timeline() {
   const [visible, setVisible] = useState(true);
 
   return (
+    <>
     <div className="container col-span-2">
       {!photos ? (
         <Skeleton count={4} width={640} height={500} className="mb-5" />
@@ -32,7 +33,8 @@ export default function Timeline() {
           <Post key={content.docId} content={content as contentProp} />
         ))
       )}
-      <PostPicModal visible={visible} setVisible={setVisible} />
     </div>
+      <PostPicModal visible={visible} setVisible={setVisible} />
+      </>
   );
 }
