@@ -6,6 +6,7 @@ import useAuthListener from './hooks/use-auth-listener';
 //  import { seedDatabase } from './seed';
 //  import { firebase } from './lib/firebase';
 import ProtectedRoute from './helpers/protected-route';
+import 'font-awesome/css/font-awesome.min.css';
 
 const Login = lazy(() => import('./pages/login'));
 const SignUp = lazy(() => import('./pages/sign-up'));
@@ -15,9 +16,9 @@ const NotFound = lazy(() => import('./pages/not-found'));
 const ProfileUpdate = lazy(() => import('./pages/profileUpdate'));
 
 export default function App() {
-  const user = useAuthListener();
+  const user = useAuthListener(); 
 
-  // useEffect(() => {
+  // useEffect(() => {  
   //    seedDatabase(firebase);
   //  }, []);
 
