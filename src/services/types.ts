@@ -7,33 +7,32 @@ type commentsType = {
   userId?: string;
   comment?: string;
   posted?: Date;
-}
+};
 
 export type postType = {
-  picURL?: string
-  post?: string
+  picURL?: string;
+  post?: string;
   posted?: Date;
-  postId?:string
-  comments?: commentsType[]
-  userId?:string
-}
+  postId?: string;
+  comments?: commentsType[];
+  userId?: string;
+};
 
 type userInfoType = {
-  aboutYou?: string
-  hobby?: string
-  phoneNumber?: string
-  residence?: string
-}
+  aboutYou?: string;
+  hobby?: string;
+  phoneNumber?: string;
+  residence?: string;
+};
 
 export type profileType = {
   username?: string;
   userId?: string;
   emailAddress?: string;
-  following?: string[] // should have userIds
-  followers?: any[] // should have userIds
-  fullName?: string
-  userInfo?: userInfoType
+  following?: string[]; // should have userIds
+  followers?: any[]; // should have userIds
+  fullName?: string;
+  userInfo?: userInfoType;
 };
 
-export type profilestype = profileType[]
-
+export type profilestype = profileType[];

@@ -1,9 +1,10 @@
 2021-09-28
-1. make modal with tailwind css
+1. make modal with tailwind css Done
 // Header
 // Images Dorp down 
 // Write post section
 // Make it beautiful.
 
-2. Refactor upload picture function
+2. Refactor upload picture function Done
+3. Make Button Component for reusability
 

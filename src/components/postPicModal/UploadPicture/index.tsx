@@ -12,12 +12,14 @@ import { useDropzone } from 'react-dropzone';
 import Preview from './preview';
 
 interface UploadPictureDropZoneProps {
-  files: any
-  setFiles: Dispatch<any>
+  files: any;
+  setFiles: Dispatch<any>;
 }
 
-const UploadPictureDropZone = ({ files, setFiles }: UploadPictureDropZoneProps) => {
-  
+const UploadPictureDropZone = ({
+  files,
+  setFiles,
+}: UploadPictureDropZoneProps) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
@@ -34,9 +36,9 @@ const UploadPictureDropZone = ({ files, setFiles }: UploadPictureDropZoneProps) 
   useEffect(() => {
     if (files.length > 2) {
       // There should be no more than 1 image for now
-    setFiles([files[0]])
-  }
-},[files])
+      setFiles([files[0]]);
+    }
+  }, [files]);
 
   useEffect(
     () => () => {
@@ -87,6 +89,5 @@ const UploadPictureDropZone = ({ files, setFiles }: UploadPictureDropZoneProps) 
     </div>
   );
 };
-
 
 export default UploadPictureDropZone;

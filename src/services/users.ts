@@ -1,10 +1,13 @@
 import { firebase, FieldValue } from '../lib/firebase';
 import { FirestoreDataType } from './types';
 
-export const PostAPost = async(collectionPath:string,data: any,userId: string) => {
-  await firebase.firestore().collection(collectionPath).doc(userId).set(data)
-
-}
+export const PostAPost = async (
+  collectionPath: string,
+  data: any,
+  userId: string
+) => {
+  await firebase.firestore().collection(collectionPath).doc(userId).set(data);
+};
 
 export async function doesUsernameExist(username: string) {
   const result = await firebase

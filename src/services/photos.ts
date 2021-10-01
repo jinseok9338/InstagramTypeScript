@@ -9,7 +9,6 @@ import { getUserByUserId, getUserByUsername } from './users';
 const storage = firebase.storage().ref();
 const Firestore = firebase.firestore();
 
-
 export interface photosWithUserDetailsType extends FirestoreDataType {
   username: string;
   userLikedPhoto: boolean;
@@ -80,7 +79,8 @@ export const uploadPictureTotheBucket = (imageAsFile: File) => {
       (snapshot) => {
         // Observe state change events such as progress, pause, and resume
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(`Upload is ${progress}% done`);
         switch (snapshot.state) {
           case Firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -94,18 +94,18 @@ export const uploadPictureTotheBucket = (imageAsFile: File) => {
       (error) => {
         // Handle unsuccessful uploads
         console.error(error);
-        reject(new Error("something bad happened"))
+        reject(new Error('something bad happened'));
       },
       () => {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL: string) => {
           console.log('File available at', downloadURL);
-          resolve(downloadURL)
-        })
+          resolve(downloadURL);
+        });
       }
     );
   });
 
-return promise
+  return promise;
 };

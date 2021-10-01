@@ -9,8 +9,6 @@ import { isFileImage } from '../utils/utils';
 const storage = firebase.storage().ref();
 const Firestore = firebase.firestore();
 
-
-
 // export async function getSuggestedProfiles(
 //   userId: string,
 //   following: string[]

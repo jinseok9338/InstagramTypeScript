@@ -6,22 +6,22 @@ import { v4 as uuidv4 } from 'uuid';
 import { uploadPictureTotheBucket } from '../../services/photos';
 import { PostAPost } from '../../services/users';
 import UploadPictureDropZone from './UploadPicture';
-import {firebase} from "../../lib/firebase"
+import { firebase } from '../../lib/firebase';
 import { postType } from '../../services/types';
+import ButtonWrapper from '../button';
 
 interface PostPicModalProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-
 const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
   const userId = firebase.auth().currentUser?.uid;
 
-  console.log(userId)
+  console.log(userId);
   const [text, setText] = useState('');
   const [files, setFiles] = useState([] as File[]);
-
+  const [loading, setLoading] = useState(true);
 
   return (
     <div
@@ -63,7 +63,6 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
                 className=" resize-none text-sm border-green-background border-opacity-50 border-2 focus:outline-none w-full p-1"
                 onChange={(e) => {
                   setText(e.target.value);
-             
                 }}
               />
             </div>
@@ -71,30 +70,34 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
 
           {/* <!--Footer--> */}
           <div className="flex justify-end pt-2">
+            <ButtonWrapper loading={loading}>
             <button
               className="px-4 bg-blue-medium p-3 rounded-lg text-white hover:bg-blue-hover mr-2"
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                uploadPictureTotheBucket(files[0]).then(async(downloadUrl) => {
-                  const postId = uuidv4();
-                  const DataPacket: postType = {
-                    comments: [],
-                    picURL: downloadUrl,
-                    post: text,
-                    posted: new Date,
-                    postId,
-                    userId
-                  };
-                  await PostAPost("posts", DataPacket, userId!)
-                  console.log("successfully Updated to the Firestore")
-                }).catch(e => {
-                  console.log(e.message)
-                })
+                uploadPictureTotheBucket(files[0])
+                  .then(async (downloadUrl) => {
+                    const postId = uuidv4();
+                    const DataPacket: postType = {
+                      comments: [],
+                      picURL: downloadUrl,
+                      post: text,
+                      posted: new Date(),
+                      postId,
+                      userId,
+                    };
+                    await PostAPost('posts', DataPacket, userId!);
+                    console.log('successfully Updated to the Firestore');
+                  })
+                  .catch((e) => {
+                    console.log(e.message);
+                  });
               }}
             >
               Post
-            </button>
+              </button>
+            </ButtonWrapper>
           </div>
         </div>
       </div>
