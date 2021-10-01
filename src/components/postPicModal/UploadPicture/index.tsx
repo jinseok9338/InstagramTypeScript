@@ -37,13 +37,12 @@ const DropZone = () => {
 
 
   return (
-    <div className="-translate-y-full text-red-600 text-center bg-white cursor-pointer">
+    <div className="-translate-y-full text-red-600 text-center bg-white cursor-pointer w-full">
       <div
-        {...getRootProps({ className: 'dropzone flex items-center justify-center m-0 h-32 w-800px border-4 border-green-primary border-dashed p-2' })} >
+        {...getRootProps({ className: 'dropzone flex items-center justify-center m-0 border-4 border-green-primary border-dashed p-2' })} >
         <input {...getInputProps()} />
         <div className="text-center font-sans text-2xl">
-          Drag & Drop Pictures Here
-          <em>(Only *.jpeg and *.png images will be accepted)</em>
+         <p>Drag and Drop Images</p>
         </div>
         <aside className="">
           {thumbs}
@@ -55,9 +54,9 @@ const DropZone = () => {
 
 const UploadPictureDropZone = () => {
   return (
-    <div className="content">
+    <>
       <DropZone />
-    </div>
+    </>
   );
 };
 
