@@ -31,6 +31,13 @@ const UploadPictureDropZone = ({ files, setFiles }: UploadPictureDropZoneProps) 
     },
   });
 
+  useEffect(() => {
+    if (files.length > 2) {
+      // There should be no more than 1 image for now
+    setFiles([files[0]])
+  }
+},[files])
+
   useEffect(
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks

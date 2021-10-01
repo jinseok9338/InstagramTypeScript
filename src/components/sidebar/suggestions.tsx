@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { getSuggestedProfiles } from '../../services/photos';
+// import { getSuggestedProfiles } from '../../services/photos';
 import SuggestedProfile from './suggested-profile';
 
 interface SuggestionPropTypes {
@@ -22,16 +22,16 @@ const Suggestions = ({
   }[];
   const [profiles, setProfiles] = useState({} as profileType); // Need to provide default value or type
 
-  useEffect(() => {
-    async function suggestedProfiles() {
-      const response = await getSuggestedProfiles(userId, following);
-      setProfiles(response);
-    }
+  // useEffect(() => {
+  //   async function suggestedProfiles() {
+  //     const response = await getSuggestedProfiles(userId, following);
+  //     setProfiles(response);
+  //   }
 
-    if (userId) {
-      suggestedProfiles();
-    }
-  }, [userId]);
+  //   if (userId) {
+  //     suggestedProfiles();
+  //   }
+  // }, [userId]);
   // hint: use the firebase service (call using userId)
   // getSuggestedProfiles
   // call the async function ^^^^ within useEffect

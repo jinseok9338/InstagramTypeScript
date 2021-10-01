@@ -64,7 +64,7 @@ export async function getUserPhotosByUsername(username: string) {
   }));
 }
 
-export const uploadPictureTotheBucket = (imageAsFile: File, AddTotheFirestore:(T?:any)=>void) => {
+export const uploadPictureTotheBucket = async(imageAsFile: File) => {
   // Need to check if the file is in jpeg, png format Either type is supported
 
   if (imageAsFile.toString() === '' || !isFileImage(imageAsFile)) {
@@ -98,8 +98,9 @@ export const uploadPictureTotheBucket = (imageAsFile: File, AddTotheFirestore:(T
       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
       uploadTask.snapshot.ref.getDownloadURL().then((downloadURL: string) => {
         console.log('File available at', downloadURL);
+        return downloadURL 
         // Add to the firestore
-        AddTotheFirestore()
+        
       });
     }
   );

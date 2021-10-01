@@ -2,6 +2,8 @@
 // Need Container and Post page for the PostPicModal for the page.. I guess?? or just Modal
 // Make modal as dynamic container
 import { Dispatch, SetStateAction, useState } from 'react';
+import { uploadPictureTotheBucket } from '../../services/photos';
+import { UpdateUserProfile } from '../../services/users';
 import UploadPictureDropZone from './UploadPicture';
 
 interface PostPicModalProps {
@@ -12,12 +14,14 @@ interface PostPicModalProps {
 
 const postPictureWithComment = (text:string, files:any[]) => {
   // Upload Picture and post a text
-  
+
 }
 
 const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
   const [text, setText] = useState('');
-  const [files, setFiles] = useState([] as any);
+  const [files, setFiles] = useState([] as File[]);
+
+
   return (
     <div
       className={`modal fixed w-full h-full top-0 left-0 flex items-center justify-center ${
@@ -58,6 +62,7 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
                 className=" resize-none text-sm border-green-background border-opacity-50 border-2 focus:outline-none w-full p-1"
                 onChange={(e) => {
                   setText(e.target.value);
+             
                 }}
               />
             </div>
@@ -70,8 +75,11 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                // picture Files
-                postPictureWithComment(text,files)
+                uploadPictureTotheBucket(files[0])
+                // Add to the firestore
+                // should I make every thing into one big data set?? No I shouldn't do that...
+                UpdateUserProfile()
+                
               }}
             >
               Post
