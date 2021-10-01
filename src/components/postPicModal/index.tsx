@@ -4,7 +4,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { uploadPictureTotheBucket } from '../../services/photos';
-import { UpdateUserProfile } from '../../services/users';
+import { PostAPost } from '../../services/users';
 import UploadPictureDropZone from './UploadPicture';
 import {firebase} from "../../lib/firebase"
 import { postType } from '../../services/types';
@@ -14,14 +14,11 @@ interface PostPicModalProps {
   setVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const userId = firebase.auth().currentUser?.uid;
-
-const postPictureWithComment = (text:string, files:any[]) => {
-  // Upload Picture and post a text
-
-}
 
 const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
+  const userId = firebase.auth().currentUser?.uid;
+
+  console.log(userId)
   const [text, setText] = useState('');
   const [files, setFiles] = useState([] as File[]);
 
@@ -89,7 +86,7 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
                     postId,
                     userId
                   };
-                  await UpdateUserProfile("posts", DataPacket, userId!)
+                  await PostAPost("posts", DataPacket, userId!)
                   console.log("successfully Updated to the Firestore")
                 }).catch(e => {
                   console.log(e.message)
