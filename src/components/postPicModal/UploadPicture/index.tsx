@@ -30,7 +30,9 @@ const DropZone = () => {
 
   const thumbs = files.map((file: File) => (
     <div className="relative" key={file.name}> 
-      <FontAwesomeIcon icon={faTimesCircle} className=" absolute -right-2 -top-2" />
+      <FontAwesomeIcon icon={faTimesCircle} className="z-51 cursor-pointer absolute -right-2 -top-2" onClick={(e) => {
+        setFiles([])
+        e.stopPropagation();}} />
         <img 
           src={(file as any).preview}
           className="w-32 h-32" 
@@ -43,7 +45,7 @@ const DropZone = () => {
 
 
   return (
-    <div className="-translate-y-full text-red-600 text-center bg-white cursor-pointer w-full h-full">
+    <div className="-translate-y-full text-red-600 text-center bg-white w-full h-full">
       <div
         {...getRootProps({ className: `dropzone flex items-center  m-0 border-4 border-green-primary border-dashed p-6 h-full ${files.length !== 0 ? "justify-start" :"justify-center"}`})} >
         <input {...getInputProps()} />
