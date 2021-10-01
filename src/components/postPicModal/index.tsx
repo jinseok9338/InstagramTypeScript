@@ -2,10 +2,12 @@
 // Need Container and Post page for the PostPicModal for the page.. I guess?? or just Modal
 // Make modal as dynamic container
 import { Dispatch, SetStateAction, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { uploadPictureTotheBucket } from '../../services/photos';
 import { UpdateUserProfile } from '../../services/users';
 import UploadPictureDropZone from './UploadPicture';
 import {firebase} from "../../lib/firebase"
+import { postType } from '../../services/types';
 
 interface PostPicModalProps {
   visible: boolean;
@@ -77,16 +79,21 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                uploadPictureTotheBucket(files[0]).then((url) => {
-
-                  UpdateUserProfile("users",dataPacket,userId!)
+                uploadPictureTotheBucket(files[0]).then(async(downloadUrl) => {
+                  const postId = uuidv4();
+                  const DataPacket: postType = {
+                    comments: [],
+                    picURL: downloadUrl,
+                    post: text,
+                    posted: new Date,
+                    postId,
+                    userId
+                  };
+                  await UpdateUserProfile("posts", DataPacket, userId!)
+                  console.log("successfully Updated to the Firestore")
                 }).catch(e => {
                   console.log(e.message)
                 })
-                // Add to the firestore
-                // should I make every thing into one big data set?? No I shouldn't do that...
-                
-                
               }}
             >
               Post

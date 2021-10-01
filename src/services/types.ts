@@ -9,11 +9,13 @@ type commentsType = {
   posted?: Date;
 }
 
-type postType = {
+export type postType = {
   picURL?: string
   post?: string
   posted?: Date;
+  postId?:string
   comments?: commentsType[]
+  userId?:string
 }
 
 type userInfoType = {
@@ -24,14 +26,12 @@ type userInfoType = {
 }
 
 export type profileType = {
-  docId?: string;
   username?: string;
   userId?: string;
   emailAddress?: string;
   following?: string[] // should have userIds
   followers?: any[] // should have userIds
   fullName?: string
-  posts?: postType[]
   userInfo?: userInfoType
 };
 
