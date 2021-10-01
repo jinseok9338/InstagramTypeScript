@@ -5,12 +5,14 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { uploadPictureTotheBucket } from '../../services/photos';
 import { UpdateUserProfile } from '../../services/users';
 import UploadPictureDropZone from './UploadPicture';
+import {firebase} from "../../lib/firebase"
 
 interface PostPicModalProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
 }
 
+const userId = firebase.auth().currentUser?.uid;
 
 const postPictureWithComment = (text:string, files:any[]) => {
   // Upload Picture and post a text
@@ -75,10 +77,15 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                uploadPictureTotheBucket(files[0])
+                uploadPictureTotheBucket(files[0]).then((url) => {
+
+                  UpdateUserProfile("users",dataPacket,userId!)
+                }).catch(e => {
+                  console.log(e.message)
+                })
                 // Add to the firestore
                 // should I make every thing into one big data set?? No I shouldn't do that...
-                UpdateUserProfile()
+                
                 
               }}
             >
