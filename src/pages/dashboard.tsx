@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../components/header';
 import Timeline from '../components/timeline';
 import Sidebar from '../components/sidebar';
 import useUser from '../hooks/use-user';
 import LoggedInUserContext from '../context/logged-in-user';
+import PostPicModal from '../components/postPicModal';
 
 interface UserContextType {
   user: firebase.default.User;
@@ -11,6 +12,7 @@ interface UserContextType {
 
 export default function Dashboard({ user: loggedInUser }: UserContextType) {
   const { user } = useUser(loggedInUser?.uid);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     document.title = 'Instagram';
@@ -19,9 +21,10 @@ export default function Dashboard({ user: loggedInUser }: UserContextType) {
   return (
     <LoggedInUserContext.Provider value={{ user }}>
       <div className="bg-gray-background">
-        <Header />
+        <Header visible={visible} setVisible={setVisible} />
         <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
           <Timeline />
+          <PostPicModal visible={visible} setVisible={setVisible} />
           <Sidebar />
         </div>
       </div>

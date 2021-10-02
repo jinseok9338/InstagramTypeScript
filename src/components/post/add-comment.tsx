@@ -7,8 +7,8 @@ interface AddCommentProptypes extends CommentsPropTypes {
   setComments: React.Dispatch<
     React.SetStateAction<
       {
-        comment: string;
-        displayName: string | null;
+        comment?: string ;
+        displayName?: string |null ;
       }[]
     >
   >;
@@ -23,7 +23,7 @@ const AddComment = ({
   const [comment, setComment] = useState('');
   const { firebase, FieldValue } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
-  const { displayName } = user;
+  const {displayName} = user
 
   const handleSubmitComment = (event: SyntheticEvent) => {
     event.preventDefault();

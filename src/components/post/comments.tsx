@@ -1,19 +1,20 @@
-import { FC, RefObject, useState } from 'react';
-import { formatDistance } from 'date-fns';
+import { RefObject, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { formatDistance } from 'date-fns';
 import AddComment from './add-comment';
+import {commentsType} from "../../services/types"
 
 export interface CommentsPropTypes {
   commentInput: RefObject<HTMLInputElement>;
-  docId: string;
-  comments: { comment: string; displayName: string | null }[];
-  posted: number | Date;
+  comments: commentsType[],
+  docId: string,
+  posted:Date
 }
 
 const Comments = ({
   docId,
-  comments: allComments,
   posted,
+ comments:allComments,
   commentInput,
 }: CommentsPropTypes) => {
   const [comments, setComments] = useState(allComments);
@@ -35,7 +36,7 @@ const Comments = ({
           </p>
         ))}
         <p className="text-gray-base uppercase text-xs mt-2">
-          {/* {formatDistance(posted, new Date())} ago */}
+          {formatDistance(posted, new Date())} ago
         </p>
       </div>
       <AddComment

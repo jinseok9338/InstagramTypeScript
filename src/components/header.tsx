@@ -1,17 +1,24 @@
 import { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
 import * as ROUTES from '../constants/routes';
 import useUser from '../hooks/use-user';
 
-export default function Header() {
-  // Todo define user and firebase context first
-  // Find the provider and infer types ....
+interface HeaderProps {
+  visible?: boolean
+  setVisible?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Header = ({ visible, setVisible }: HeaderProps)=> {
+  
   const { user: loggedInUser } = useContext(UserContext);
   const { user } = useUser(loggedInUser?.uid);
   const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
+
 
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -31,17 +38,11 @@ export default function Header() {
           <div className="text-gray-700 text-center flex items-center align-items">
             {user ? (
               <>
-                <Link to={ROUTES.DASHBOARD} aria-label="Add the picture">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-8 mr-6 text-black-light cursor-pointer"
-                    width="30"
-                    height="30"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
-                  </svg>
-                </Link>
+                <div className="mr-6 text-black-light cursor-pointer">
+                <FontAwesomeIcon
+                    icon={faPlusCircle} className="text-3xl w-12"
+                    onClick={()=>setVisible?.(true) }/>
+                </div>
                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                   <svg
                     className="w-8 mr-6 text-black-light cursor-pointer"
@@ -126,3 +127,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;

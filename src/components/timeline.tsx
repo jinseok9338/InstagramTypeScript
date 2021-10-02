@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-nested-ternary */
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import LoggedInUserContext from '../context/logged-in-user';
 import usePhotos from '../hooks/use-photos';
 import Post from './post';
-import PostPicModal from './postPicModal';
+
 
 interface contentProp {
   username: string;
@@ -21,7 +21,7 @@ interface contentProp {
 export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
   const { photos } = usePhotos(user);
-  const [visible, setVisible] = useState(true);
+ 
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function Timeline() {
           ))
         )}
       </div>
-      <PostPicModal visible={visible} setVisible={setVisible} />
+     
     </>
   );
 }

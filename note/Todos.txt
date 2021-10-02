@@ -6,5 +6,6 @@
 // Make it beautiful.
 
 2. Refactor upload picture function Done
-3. Make Button Component for reusability
-
+3. Make Button Component for reusability ... Not really Need to refactor it from the ground up 
+4. Make sideBar Component 
+// Need to refactor suggest profiles functions

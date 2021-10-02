@@ -19,7 +19,8 @@ interface PostPicModalProps {
 }
 
 const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
-  const userId = firebase.auth().currentUser?.uid;
+  const {displayName,uid} = firebase.auth().currentUser!
+  
 
   const [text, setText] = useState('');
   const [files, setFiles] = useState([] as File[]);
@@ -89,14 +90,16 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
                   .then(async (downloadUrl) => {
                     const postId = uuidv4();
                     const DataPacket: postType = {
+                      likes:[],
                       comments: [],
                       picURL: downloadUrl,
                       post: text,
                       posted: new Date(),
                       postId,
-                      userId,
+                      userId:uid,
+                      userName:displayName!
                     };
-                    await PostAPost('posts', DataPacket, userId!);
+                    await PostAPost('posts', DataPacket, uid!);
                     console.log('successfully Updated to the Firestore');
                     setLoading(false)
                     setVisible(false)

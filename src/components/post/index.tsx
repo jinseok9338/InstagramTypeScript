@@ -5,21 +5,11 @@ import Image from './image';
 import Actions from './actions';
 import Footer from './footer';
 import Comments from './comments';
+import { postType } from '../../services/types';
+import {firebase} from "../../lib/firebase"
 
-export interface PostcontentProp {
-  content: {
-    username: string;
-    imageSrc: string;
-    caption: string;
-    docId: string;
-    userLikedPhoto: boolean;
-    likes: any[];
-    comments: { comment: string; displayName: string }[];
-    dateCreated: number | Date;
-  };
-}
 
-const Post = ({ content }: PostcontentProp) => {
+const Post = (posts: postType[]) => {
   const commentInput = useRef<HTMLInputElement>(null);
 
   const handleFocus = () => {
@@ -32,28 +22,28 @@ const Post = ({ content }: PostcontentProp) => {
   // -> header, image, actions (like & comment icons), footer, comments
   return (
     <>
-      {Object.keys(content).length !== 0 && (
+      {posts.length !== 0 && posts.map((post) => (
         <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
-          <Header username={content?.username as string} />
+          <Header username={post.userName!} />
           <Image
-            src={content?.imageSrc as string}
-            caption={content?.caption as string}
+            src={post.picURL!}
+            caption={post.post!}
           />
           <Actions
-            docId={content?.docId}
-            totalLikes={content?.likes?.length}
-            likedPhoto={content?.userLikedPhoto}
+            docId={post.postId!}
+            totalLikes={post.likes?.length!}
+            likedPhoto={post.likes?.includes(firebase.auth().currentUser?.uid!)!}
             handleFocus={handleFocus}
           />
-          <Footer caption={content?.caption} username={content?.username} />
+          <Footer caption={post.post!} username={post?.userName!} />
           <Comments
-            docId={content?.docId as string}
-            comments={content?.comments} // Array
-            posted={content?.dateCreated} // TimeStamp
+            docId={post.postId!}
+            comments={post.comments!} // Array // Display Name... conumdrum...
+            posted={post.posted!} // TimeStamp
             commentInput={commentInput}
           />
         </div>
-      )}
+      ))}
     </>
   );
 };

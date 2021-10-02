@@ -3,10 +3,11 @@ export interface FirestoreDataType
   docId: string;
 }
 
-type commentsType = {
+export type commentsType = {
   userId?: string;
   comment?: string;
   posted?: Date;
+  displayName?:string | null
 };
 
 export type postType = {
@@ -16,6 +17,9 @@ export type postType = {
   postId?: string;
   comments?: commentsType[];
   userId?: string;
+  likes?: string[]
+  userName?: string
+  
 };
 
 type userInfoType = {

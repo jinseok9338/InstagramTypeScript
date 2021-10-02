@@ -17,6 +17,7 @@ const ProfileUpdate = lazy(() => import('./pages/profileUpdate'));
 
 export default function App() {
   const user = useAuthListener();
+  
 
   // useEffect(() => {
   //    seedDatabase(firebase);
