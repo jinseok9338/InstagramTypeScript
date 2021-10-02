@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
 
 import UserContext from '../../context/user';
+import { ToggleFollowing } from '../../services/followingFollowers';
 
 
 interface HeaderPropTypes {
@@ -40,32 +41,10 @@ const Header = ({
   const activeBtnFollow = user?.username && user?.username !== profileUsername;
 
   const handleToggleFollow = async () => {
-    setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
-    setFollowerCount({
-      followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1,
-    });
-    await toggleFollow(
-      isFollowingProfile,
-      profileDocId,
-      profileUserId,
-      user.userId!
-    );
+    await ToggleFollowing(loggedInUser?.uid,);
   };
 
-  // useEffect(() => {
-  //   const isLoggedInUserFollowingProfile = async () => {
-  //     const isFollowing = await isUserFollowingProfile(
-  //       user.username!,
-  //       profileUserId
-  //     );
-  //     setIsFollowingProfile(!!isFollowing);
-  //   };
-
-  //   if (user?.username && profileUserId) {
-  //     isLoggedInUserFollowingProfile();
-  //   }
-  // }, [user?.username, profileUserId]);
-
+ 
   return (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
       <div className="container flex justify-center items-center">
