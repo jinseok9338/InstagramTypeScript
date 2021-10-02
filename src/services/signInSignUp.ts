@@ -29,8 +29,7 @@ export const AddUserToFirestore = async (
   try {
     const createdUserResult = await firebase
       .auth()
-      .createUserWithEmailAndPassword(emailAddress, password)
-    
+      .createUserWithEmailAndPassword(emailAddress, password);
 
     if (createdUserResult.user != null) {
       await createdUserResult.user.updateProfile({

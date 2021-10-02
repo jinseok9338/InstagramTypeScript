@@ -8,7 +8,7 @@ const ButtonWrapper = ({ loading, children, ...rest }: ButtonWrapperProps) =>
   loading ? (
     <div className="grid">
       {children}
-            <Spinner />
+      <Spinner />
     </div>
   ) : (
     <>{children}</>

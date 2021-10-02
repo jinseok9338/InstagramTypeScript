@@ -6,10 +6,19 @@ import Actions from './actions';
 import Footer from './footer';
 import Comments from './comments';
 import { postType } from '../../services/types';
-import {firebase} from "../../lib/firebase"
+import { firebase } from '../../lib/firebase';
 
-
-const Post = (posts: postType[]) => {
+const Post = ({
+  userName,
+  comments,
+  userLikedPhoto,
+  userId,
+  posted,
+  postId,
+  post,
+  picURL,
+  likes,
+}: postType) => {
   const commentInput = useRef<HTMLInputElement>(null);
 
   const handleFocus = () => {
@@ -22,28 +31,23 @@ const Post = (posts: postType[]) => {
   // -> header, image, actions (like & comment icons), footer, comments
   return (
     <>
-      {posts.length !== 0 && posts.map((post) => (
-        <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
-          <Header username={post.userName!} />
-          <Image
-            src={post.picURL!}
-            caption={post.post!}
-          />
-          <Actions
-            docId={post.postId!}
-            totalLikes={post.likes?.length!}
-            likedPhoto={post.likes?.includes(firebase.auth().currentUser?.uid!)!}
-            handleFocus={handleFocus}
-          />
-          <Footer caption={post.post!} username={post?.userName!} />
-          <Comments
-            docId={post.postId!}
-            comments={post.comments!} // Array // Display Name... conumdrum...
-            posted={post.posted!} // TimeStamp
-            commentInput={commentInput}
-          />
-        </div>
-      ))}
+      <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
+        <Header username={userName!} />
+        <Image src={picURL!} caption={post!} />
+        <Actions
+          docId={postId!}
+          totalLikes={likes?.length!}
+          likedPhoto={likes?.includes(firebase.auth().currentUser?.uid!)!}
+          handleFocus={handleFocus}
+        />
+        <Footer caption={post!} username={userName!} />
+        <Comments
+          docId={postId!}
+          comments={comments!} // Array // Display Name... conumdrum...
+          posted={posted!} // TimeStamp
+          commentInput={commentInput}
+        />
+      </div>
     </>
   );
 };

@@ -7,21 +7,9 @@ import usePhotos from '../hooks/use-photos';
 import Post from './post';
 
 
-interface contentProp {
-  username: string;
-  imageSrc: string;
-  caption: string;
-  docId: string;
-  userLikedPhoto: boolean;
-  likes: any[];
-  comments: { comment: string; displayName: string }[];
-  dateCreated: number | Date;
-}
-
 export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
   const { photos } = usePhotos(user);
- 
 
   return (
     <>
@@ -29,12 +17,22 @@ export default function Timeline() {
         {!photos ? (
           <Skeleton count={4} width={640} height={500} className="mb-5" />
         ) : (
-          photos.map((content) => (
-            <Post key={content.docId} content={content as contentProp} />
+          photos.map((post) => (
+            <Post
+              key={post?.postId!}
+              comments={post.comments}
+              likes={post.likes}
+              picURL={post.picURL}
+              post={post.post}
+              postId={post.postId}
+              posted={post.posted}
+              userId={post.userId}
+              userLikedPhoto={post.userLikedPhoto}
+              userName={post.userName}
+            />
           ))
         )}
       </div>
-     
     </>
   );
 }

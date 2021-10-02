@@ -2,7 +2,7 @@
 import Firebase from 'firebase';
 import { isFileImage } from '../utils/utils';
 import { firebase } from '../lib/firebase';
-import { FirestoreDataType, profilestype, profileType } from './types';
+import { FirestoreDataType, postType } from './types';
 import { getUserByUserId, getUserByUsername } from './users';
 // This file handles photo related functions
 
@@ -18,31 +18,31 @@ export interface photosWithUserDetailsType extends FirestoreDataType {
 export async function getPhotos(
   userId: string,
   following: string[]
-): Promise<photosWithUserDetailsType[]> {
+): Promise<postType[]> {
   // [5,4,2] => following
   const result = await firebase
     .firestore()
-    .collection('photos')
+    .collection('posts')
     .where('userId', 'in', following)
     .get();
 
-  const userFollowedPhotos: FirestoreDataType[] = result.docs.map((photo) => ({
-    ...photo.data(),
-    docId: photo.id,
+  const userFollowedPhotos: FirestoreDataType[] = result.docs.map((post) => ({
+    ...post.data(),
+    docId: post.id,
   }));
 
   const photosWithUserDetails = await Promise.all(
-    userFollowedPhotos.map(async (photo) => {
+    userFollowedPhotos.map(async (post) => {
       let userLikedPhoto = false;
-      if (photo.likes.includes(userId)) {
+      if (post.likes.includes(userId)) {
         userLikedPhoto = true;
       }
       // photo.userId = 2
-      const user = await getUserByUserId(photo.userId);
+      const user = await getUserByUserId(post.userId);
       // raphael
 
       const { username } = user[0];
-      return { username, ...photo, userLikedPhoto };
+      return { username, ...post, userLikedPhoto };
     })
   );
 

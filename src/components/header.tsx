@@ -8,17 +8,15 @@ import * as ROUTES from '../constants/routes';
 import useUser from '../hooks/use-user';
 
 interface HeaderProps {
-  visible?: boolean
-  setVisible?: React.Dispatch<React.SetStateAction<boolean>>
+  visible?: boolean;
+  setVisible?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header = ({ visible, setVisible }: HeaderProps)=> {
-  
+const Header = ({ visible, setVisible }: HeaderProps) => {
   const { user: loggedInUser } = useContext(UserContext);
   const { user } = useUser(loggedInUser?.uid);
   const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
-
 
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -39,9 +37,11 @@ const Header = ({ visible, setVisible }: HeaderProps)=> {
             {user ? (
               <>
                 <div className="mr-6 text-black-light cursor-pointer">
-                <FontAwesomeIcon
-                    icon={faPlusCircle} className="text-3xl w-12"
-                    onClick={()=>setVisible?.(true) }/>
+                  <FontAwesomeIcon
+                    icon={faPlusCircle}
+                    className="text-3xl w-12"
+                    onClick={() => setVisible?.(true)}
+                  />
                 </div>
                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                   <svg
@@ -126,6 +126,6 @@ const Header = ({ visible, setVisible }: HeaderProps)=> {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

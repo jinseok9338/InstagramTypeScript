@@ -2,19 +2,19 @@ import { RefObject, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatDistance } from 'date-fns';
 import AddComment from './add-comment';
-import {commentsType} from "../../services/types"
+import { commentsType } from '../../services/types';
 
 export interface CommentsPropTypes {
   commentInput: RefObject<HTMLInputElement>;
-  comments: commentsType[],
-  docId: string,
-  posted:Date
+  comments: commentsType[];
+  docId: string;
+  posted: Date;
 }
 
 const Comments = ({
   docId,
   posted,
- comments:allComments,
+  comments: allComments,
   commentInput,
 }: CommentsPropTypes) => {
   const [comments, setComments] = useState(allComments);

@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
-import { FirestoreDataType } from '../services/types';
-import { getPhotos, photosWithUserDetailsType } from '../services/photos';
+import { profileType, postType } from '../services/types';
+import { getPhotos } from '../services/photos';
 
-export default function usePhotos(user: FirestoreDataType | null) {
-  const [photos, setPhotos] = useState([{}] as photosWithUserDetailsType[]);
+export default function usePhotos(user: profileType | null) {
+  const [photos, setPhotos] = useState([{}] as postType[]);
 
   useEffect(() => {
     async function getTimelinePhotos() {
       // does the user actually follow people?
-      if (user?.following?.length > 0) {
+      if (user?.following?.length! > 0) {
         const followedUserPhotos = await getPhotos(
-          user!.userId,
-          user!.following
+          user?.userId!,
+          user?.following!
         );
 
-        followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
+        followedUserPhotos.sort(
+          (a, b) =>
+            Number(b.posted?.toISOString) - Number(a.posted?.toISOString)
+        );
         setPhotos(followedUserPhotos);
       }
     }

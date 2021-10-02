@@ -1,8 +1,8 @@
 import { createContext } from 'react';
-import { FirestoreDataType } from '../services/types';
+import { profileType } from '../services/types';
 
 interface UserContextType {
-  user: FirestoreDataType | null;
+  user: profileType | null;
 }
 
 const LoggedInUserContext = createContext<UserContextType>(

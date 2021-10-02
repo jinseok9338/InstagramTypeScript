@@ -3,8 +3,8 @@
 // Make modal as dynamic container
 import { Dispatch, SetStateAction, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import ClipLoader from "react-spinners/ClipLoader";
-import { css } from "@emotion/react";
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/react';
 import { uploadPictureTotheBucket } from '../../services/photos';
 import { PostAPost } from '../../services/users';
 import UploadPictureDropZone from './UploadPicture';
@@ -12,24 +12,22 @@ import { firebase } from '../../lib/firebase';
 import { postType } from '../../services/types';
 import ButtonWrapper from '../button';
 
-
 interface PostPicModalProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
 }
 
 const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
-  const {displayName,uid} = firebase.auth().currentUser!
-  
+  const { displayName, uid } = firebase.auth().currentUser!;
 
   const [text, setText] = useState('');
   const [files, setFiles] = useState([] as File[]);
   const [loading, setLoading] = useState(false);
 
   const override = css`
-  display: block;
-  margin: 0 auto;
-`;
+    display: block;
+    margin: 0 auto;
+  `;
 
   return (
     <div
@@ -78,43 +76,48 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
 
           {/* <!--Footer--> */}
           <div className="flex justify-end pt-2">
-          
             <button
-              className={`flex relative justify-center px-4 bg-blue-medium p-3 rounded-lg text-white ${!loading ? "hover:bg-blue-hover " :"cursor-wait"} mr-2`}
+              className={`flex relative justify-center px-4 bg-blue-medium p-3 rounded-lg text-white ${
+                !loading ? 'hover:bg-blue-hover ' : 'cursor-wait'
+              } mr-2`}
               type="submit"
               disabled={loading}
               onClick={(e) => {
                 e.preventDefault();
-                setLoading(true)
+                setLoading(true);
                 uploadPictureTotheBucket(files[0])
                   .then(async (downloadUrl) => {
                     const postId = uuidv4();
                     const DataPacket: postType = {
-                      likes:[],
+                      likes: [],
                       comments: [],
                       picURL: downloadUrl,
                       post: text,
                       posted: new Date(),
                       postId,
-                      userId:uid,
-                      userName:displayName!
+                      userId: uid,
+                      userName: displayName!,
                     };
                     await PostAPost('posts', DataPacket, uid!);
                     console.log('successfully Updated to the Firestore');
-                    setLoading(false)
-                    setVisible(false)
+                    setLoading(false);
+                    setVisible(false);
                   })
                   .catch((e) => {
                     console.log(e.message);
-                    setLoading(false)
-                    alert("Something went Wrong Try again")
+                    setLoading(false);
+                    alert('Something went Wrong Try again');
                   });
               }}
             >
               <p>Post</p>
-              <ClipLoader color="#7e1f53" loading={loading} css={override} size={20} />
-              </button>
-            
+              <ClipLoader
+                color="#7e1f53"
+                loading={loading}
+                css={override}
+                size={20}
+              />
+            </button>
           </div>
         </div>
       </div>
