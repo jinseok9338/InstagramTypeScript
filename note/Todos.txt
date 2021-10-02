@@ -9,3 +9,10 @@
 3. Make Button Component for reusability ... Not really Need to refactor it from the ground up 
 4. Make sideBar Component 
 // Need to refactor suggest profiles functions
+
+
+<Suggestions
+  userId={user?.userId!}
+  following={user?.following!}
+  loggedInUserDocId={user?.docId!}
+/>

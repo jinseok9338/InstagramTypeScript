@@ -1,5 +1,5 @@
 import { firebase, FieldValue } from '../lib/firebase';
-import { FirestoreDataType } from './types';
+import { FirestoreDataType, profileType } from './types';
 
 export const PostAPost = async (
   collectionPath: string,
@@ -35,7 +35,7 @@ export async function getUserByUsername(username: string) {
 // get user from the firestore where userId === userId (passed from the auth)
 export async function getUserByUserId(
   userId: string
-): Promise<FirestoreDataType[]> {
+): Promise<profileType[]> {
   const result = await firebase
     .firestore()
     .collection('users')
@@ -43,7 +43,6 @@ export async function getUserByUserId(
     .get();
   const user = result.docs.map((item) => ({
     ...item.data(),
-    docId: item.id,
   }));
 
   return user;

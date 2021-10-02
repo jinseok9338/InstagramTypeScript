@@ -46,17 +46,17 @@ const Header = ({
     });
     await toggleFollow(
       isFollowingProfile,
-      user.docId,
+      user.docId, // what do I do with it ... Should I make suggested thing from scratch
       profileDocId,
       profileUserId,
-      user.userId
+      user.userId!
     );
   };
 
   useEffect(() => {
     const isLoggedInUserFollowingProfile = async () => {
       const isFollowing = await isUserFollowingProfile(
-        user.username,
+        user.username!,
         profileUserId
       );
       setIsFollowingProfile(!!isFollowing);
