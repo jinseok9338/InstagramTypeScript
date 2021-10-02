@@ -6,7 +6,7 @@ interface ButtonWrapperProps extends React.ComponentPropsWithoutRef<'button'> {
 
 const ButtonWrapper = ({ loading, children, ...rest }: ButtonWrapperProps) =>
   loading ? (
-    <div className="">
+    <div className="grid">
       {children}
             <Spinner />
     </div>

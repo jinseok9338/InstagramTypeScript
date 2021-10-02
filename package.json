@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.3.0",
+    "@emotion/react": "^11.4.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
@@ -30,6 +31,7 @@
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-spinners": "^0.11.0",
     "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
