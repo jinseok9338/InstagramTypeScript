@@ -5,7 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
 
 import UserContext from '../../context/user';
-import { toggleFollow, isUserFollowingProfile } from '../../services/users';
+
 
 interface HeaderPropTypes {
   photosCount: number;
@@ -34,8 +34,8 @@ const Header = ({
     username: profileUsername,
   },
 }: HeaderPropTypes) => {
-  const { user: loggedInUser } = useContext(UserContext);
-  const { user } = useUser(loggedInUser?.uid);
+  const { user: loggedInUser } = useContext(UserContext); // auth user
+  const { user } = useUser(loggedInUser?.uid); // with user Profile 
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
   const activeBtnFollow = user?.username && user?.username !== profileUsername;
 
@@ -46,26 +46,25 @@ const Header = ({
     });
     await toggleFollow(
       isFollowingProfile,
-      user.docId, // what do I do with it ... Should I make suggested thing from scratch
       profileDocId,
       profileUserId,
       user.userId!
     );
   };
 
-  useEffect(() => {
-    const isLoggedInUserFollowingProfile = async () => {
-      const isFollowing = await isUserFollowingProfile(
-        user.username!,
-        profileUserId
-      );
-      setIsFollowingProfile(!!isFollowing);
-    };
+  // useEffect(() => {
+  //   const isLoggedInUserFollowingProfile = async () => {
+  //     const isFollowing = await isUserFollowingProfile(
+  //       user.username!,
+  //       profileUserId
+  //     );
+  //     setIsFollowingProfile(!!isFollowing);
+  //   };
 
-    if (user?.username && profileUserId) {
-      isLoggedInUserFollowingProfile();
-    }
-  }, [user?.username, profileUserId]);
+  //   if (user?.username && profileUserId) {
+  //     isLoggedInUserFollowingProfile();
+  //   }
+  // }, [user?.username, profileUserId]);
 
   return (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">

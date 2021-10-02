@@ -1,4 +1,5 @@
-import { firebase, FieldValue } from '../lib/firebase';
+import useUser from '../hooks/use-user';
+import { firebase, FieldValue, Firestore } from '../lib/firebase';
 import { FirestoreDataType, profileType } from './types';
 
 export const PostAPost = async (
@@ -35,7 +36,7 @@ export async function getUserByUsername(username: string) {
 // get user from the firestore where userId === userId (passed from the auth)
 export async function getUserByUserId(
   userId: string
-): Promise<profileType[]> {
+): Promise<profileType> {
   const result = await firebase
     .firestore()
     .collection('users')
@@ -45,82 +46,41 @@ export async function getUserByUserId(
     ...item.data(),
   }));
 
-  return user;
+  return user[0];
 }
 
-export async function isUserFollowingProfile(
-  loggedInUserUsername: string,
-  profileUserId: string
-) {
-  const result = await firebase
-    .firestore()
-    .collection('users')
-    .where('username', '==', loggedInUserUsername) // karl (active logged in user)
-    .where('following', 'array-contains', profileUserId)
-    .get();
 
-  const [response = {} as FirestoreDataType] = result.docs.map((item) => ({
-    ...item.data(),
-    docId: item.id,
-  }));
 
-  return response.userId;
+
+export const followingUpdate = async(LoggedInUserId:string,followingUserId:string) => {
+  // Update following array and return something When LoggedInUser follows followingUserId
+const user = await getUserByUserId(LoggedInUserId)
+  firebase.firestore().collection("users").doc(LoggedInUserId).update({ ...user, following: [followingUserId, ...user.following!] }).then(async() => {
+    console.log("successfully Updated following")
+    const followedUser = await getUserByUserId(followingUserId)
+    firebase.firestore().collection("users").doc(followingUserId).update({ ...followedUser, followers: [LoggedInUserId, ...followedUser.followers!] }).then(() => {
+      console.log("successfully Updated followers")
+    }).catch((e) => {
+      console.error(e.message)
+    })
+  }).catch(e => {
+  console.error(e.message)
+})
+
 }
 
-export async function updateLoggedInUserFollowing(
-  loggedInUserDocId: string, // currently logged in user document id (karl's profile)
-  profileId: string, // the user that karl requests to follow
-  isFollowingProfile: boolean // true/false (am i currently following this person?)
-) {
-  return firebase
-    .firestore()
-    .collection('users')
-    .doc(loggedInUserDocId)
-    .update({
-      following: isFollowingProfile
-        ? FieldValue.arrayRemove(profileId)
-        : FieldValue.arrayUnion(profileId),
-    });
-}
-
-export async function updateFollowedUserFollowers(
-  profileDocId: string, // currently logged in user document id (karl's profile)
-  loggedInUserDocId: string, // the user that karl requests to follow
-  isFollowingProfile: boolean // true/false (am i currently following this person?)
-) {
-  return firebase
-    .firestore()
-    .collection('users')
-    .doc(profileDocId)
-    .update({
-      followers: isFollowingProfile
-        ? FieldValue.arrayRemove(loggedInUserDocId)
-        : FieldValue.arrayUnion(loggedInUserDocId),
-    });
-}
-
-export async function toggleFollow(
-  isFollowingProfile: boolean,
-  activeUserDocId: string,
-  profileDocId: string,
-  profileUserId: string,
-  followingUserId: string
-) {
-  // 1st param: karl's doc id
-  // 2nd param: raphael's user id
-  // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
-  await updateLoggedInUserFollowing(
-    activeUserDocId,
-    profileUserId,
-    isFollowingProfile
-  );
-
-  // 1st param: karl's user id
-  // 2nd param: raphael's doc id
-  // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
-  await updateFollowedUserFollowers(
-    profileDocId,
-    followingUserId,
-    isFollowingProfile
-  );
+export const followersUpdate = async (LoggedInUserId: string, followersUserId: string) => {
+  // Update following array and return something When LoggedInUser follows followingUserId
+  const user = await getUserByUserId(LoggedInUserId)
+  firebase.firestore().collection("users").doc(LoggedInUserId).update({ ...user, followers: [followersUserId, ...user.followers!] }).then(async() => {
+    console.log("successfully Updated followers")
+    const followingUser = await getUserByUserId(followersUserId)
+    firebase.firestore().collection("users").doc(followersUserId).update({ ...followingUser, following: [LoggedInUserId, ...followingUser.following!] }).then(() => {
+      console.log("successfully Updated following")
+    }).catch(e => {
+      console.error(e.message)
+    })
+  }).catch(e => {
+    console.error(e.message)
+  })
 }
