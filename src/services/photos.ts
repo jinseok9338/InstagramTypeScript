@@ -41,7 +41,7 @@ export async function getPhotos(
       const user = await getUserByUserId(post.userId);
       // raphael
 
-      const { username } = user[0];
+      const { username } = user;
       return { username, ...post, userLikedPhoto };
     })
   );

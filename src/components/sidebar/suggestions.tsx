@@ -1,8 +1,11 @@
 /* eslint-disable no-nested-ternary */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
-// import { getSuggestedProfiles } from '../../services/photos';
+import {firebase} from "../../lib/firebase"
 import SuggestedProfile from './suggested-profile';
+import UserContext from '../../context/user';
+import useUser from '../../hooks/use-user';
+import { profileType } from '../../services/types';
 
 interface SuggestionPropTypes {
   userId: string;
@@ -15,41 +18,37 @@ const Suggestions = ({
   following,
   loggedInUserDocId,
 }: SuggestionPropTypes) => {
-  type profileType = {
-    docId: string;
-    username?: string;
-    userId?: string;
-  }[];
-  const [profiles, setProfiles] = useState({} as profileType); // Need to provide default value or type
 
-  // useEffect(() => {
-  //   async function suggestedProfiles() {
-  //     const response = await getSuggestedProfiles(userId, following);
-  //     setProfiles(response);
-  //   }
 
-  //   if (userId) {
-  //     suggestedProfiles();
-  //   }
-  // }, [userId]);
-  // hint: use the firebase service (call using userId)
-  // getSuggestedProfiles
-  // call the async function ^^^^ within useEffect
-  // store it in state
-  // go ahead and render (wait on the profiles as in 'skeleton')
+  const [suggestedUsers, setSuggestedUsers] = useState([] as profileType[])
 
-  return !profiles ? (
+  const { user: loggedInUser } = useContext(UserContext); // auth user
+  console.log(loggedInUser)
+  const {user} = useUser(loggedInUser?.uid); // with user Profile // This doesn't work why...??
+  console.log(user)
+  console.log(suggestedUsers, "suggestedUsers")
+
+  useEffect(() => {
+    firebase.firestore().collection('users').where('userId', 'not-in', user.following).limit(5).get().then((res) => {
+      const usersProfile = res.docs.map((doc) => doc.data()) as profileType[]
+      setSuggestedUsers(usersProfile)
+    })
+    // Do we need to retrigger this function when there was a following changed?
+  }, [])
+
+
+  return !suggestedUsers ? (
     <Skeleton count={1} height={150} className="mt-5" />
-  ) : profiles.length > 0 ? (
+  ) : suggestedUsers.length > 0 ? (
     <div className="rounded flex flex-col">
       <div className="text-sm flex items-center align-items justify-between mb-2">
         <p className="font-bold text-gray-base">Suggestions for you</p>
       </div>
       <div className="mt-4 grid gap-5">
-        {profiles.map((profile) => (
+          {suggestedUsers.map((profile) => (
           <SuggestedProfile
-            key={profile?.docId}
-            profileDocId={profile.docId}
+            key={profile.userId}
+            profileDocId={profile.userId!}
             username={profile.username ? profile.username : 'unknown'} // Profile may contain username
             profileId={profile.userId ? profile.userId : 'unknown'}
             userId={userId}

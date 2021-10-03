@@ -11,10 +11,10 @@ export const Addfollowing = async (LoggedInUserId: string, followingUserId: stri
         await firebase.firestore().collection("users").doc(followingUserId).update({ ...followedUser, followers: [LoggedInUserId, ...followedUser.followers!] })
         console.log("successfully Updated followers")
     } catch (e) {
-        console.error(e.message)
+        console.error(e)
     }
-}
-
+} 
+ 
 export const SubtractFollowing = async (LoggedInUserId: string, followingUserId: string) => {
     try {
         const user = await getUserByUserId(LoggedInUserId)
@@ -27,7 +27,7 @@ export const SubtractFollowing = async (LoggedInUserId: string, followingUserId:
         await firebase.firestore().collection("users").doc(followingUserId).update({ ...followedUser, followers: newFollowers })
         console.log("successfully Updated followers")
     } catch (e) {
-        console.error(e.message)
+        console.error(e)
     }
 }
 

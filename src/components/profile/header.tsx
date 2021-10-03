@@ -6,6 +6,8 @@ import useUser from '../../hooks/use-user';
 
 import UserContext from '../../context/user';
 import { ToggleFollowing } from '../../services/followingFollowers';
+import { profileType } from '../../services/types';
+import {firebase} from "../../lib/firebase"
 
 
 interface HeaderPropTypes {
@@ -38,11 +40,6 @@ const Header = ({
   const { user: loggedInUser } = useContext(UserContext); // auth user
   const { user } = useUser(loggedInUser?.uid); // with user Profile 
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
-  const activeBtnFollow = user?.username && user?.username !== profileUsername;
-
-  const handleToggleFollow = async () => {
-    await ToggleFollowing(loggedInUser?.uid,);
-  };
 
  
   return (
@@ -51,8 +48,8 @@ const Header = ({
         {profileUsername ? (
           <img
             className="rounded-full h-40 w-40 flex"
-            alt={`${fullName} profile picture`}
             src="/images/unknown.png"
+            alt={`${fullName} profile picture`}
           />
         ) : (
           <img
@@ -65,16 +62,10 @@ const Header = ({
       <div className="flex items-center justify-center flex-col col-span-2">
         <div className="container flex items-center">
           <p className="text-2xl mr-4">{profileUsername}</p>
-          {activeBtnFollow && (
+          {true && (
             <button
               className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
               type="button"
-              onClick={handleToggleFollow}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  handleToggleFollow();
-                }
-              }}
             >
               {isFollowingProfile ? 'Unfollow' : 'Follow'}
             </button>

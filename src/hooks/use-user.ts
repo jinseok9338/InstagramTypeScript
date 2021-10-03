@@ -7,8 +7,8 @@ export default function useUser(userId: string) {
 
   useEffect(() => {
     async function getUserObjByUserId(userId: string) {
-      const user: profileType = await getUserByUserId(userId);
-      setActiveUser(user || {});
+      const user = await getUserByUserId(userId);
+      setActiveUser(user);
     }
 
     if (userId) {
@@ -16,5 +16,5 @@ export default function useUser(userId: string) {
     }
   }, [userId]);
 
-  return { user: activeUser };
+  return {user:activeUser}
 }

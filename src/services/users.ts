@@ -39,13 +39,10 @@ export async function getUserByUserId(
   const result = await firebase
     .firestore()
     .collection('users')
-    .where('userId', '==', userId)
+    .doc(userId)
     .get();
-  const user = result.docs.map((item) => ({
-    ...item.data(),
-  }));
-
-  return user[0];
+  const user = result.data() as profileType
+  return user;
 }
 
 

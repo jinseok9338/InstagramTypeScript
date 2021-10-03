@@ -22,7 +22,7 @@ const Firestore = firebase.firestore();
 //         profile.userId !== userId && !following.includes(profile.userId)
 //     );
 // }
-
+ 
 export interface updatedProfileType {
   residence: string;
   hobby: string;

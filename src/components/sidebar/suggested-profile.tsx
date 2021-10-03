@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  updateLoggedInUserFollowing,
-  updateFollowedUserFollowers,
-} from '../../services/users';
+
 
 interface SuggestedProfileProptypes {
   profileDocId: string;
@@ -24,10 +21,8 @@ const SuggestedProfile = ({
 
   async function handleFollowUser() {
     setFollowed(true);
-    await updateLoggedInUserFollowing(loggedInUserDocId, profileId, false);
-    await updateFollowedUserFollowers(profileDocId, userId, false);
   }
-
+  
   return !followed ? (
     <div className="flex flex-row items-center align-items justify-between">
       <div className="flex items-center justify-between">

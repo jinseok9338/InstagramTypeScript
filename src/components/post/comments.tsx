@@ -18,6 +18,7 @@ const Comments = ({
   commentInput,
 }: CommentsPropTypes) => {
   const [comments, setComments] = useState(allComments);
+  console.log(posted, new Date())
 
   return (
     <>
@@ -36,7 +37,7 @@ const Comments = ({
           </p>
         ))}
         <p className="text-gray-base uppercase text-xs mt-2">
-          {formatDistance(posted, new Date())} ago
+          {posted && formatDistance(posted, new Date())} ago
         </p>
       </div>
       <AddComment
