@@ -7,6 +7,7 @@ import Footer from './footer';
 import Comments from './comments';
 import { postType } from '../../services/types';
 import { firebase } from '../../lib/firebase';
+import useUser from "../../hooks/use-user"
 
 const Post = ({
   userName,
@@ -16,9 +17,10 @@ const Post = ({
   post,
   picURL,
   likes,
+  userId
 }: postType) => {
   const commentInput = useRef<HTMLInputElement>(null);
-
+  const { user } = useUser(userId!)
   const handleFocus = () => {
     if (commentInput && commentInput.current) {
       commentInput.current.focus();
@@ -30,7 +32,7 @@ const Post = ({
   return (
     <>
       <div className="rounded col-span-4 border bg-white border-gray-primary mb-12">
-        <Header username={userName!} />
+        <Header username={userName!} profilePic={user.profilePic!} />
         <Image src={picURL!} caption={post!} />
         <Actions
           docId={postId!}

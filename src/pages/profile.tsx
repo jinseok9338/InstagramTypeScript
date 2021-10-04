@@ -36,6 +36,7 @@ const Profile = () => {
           fullName={user.fullName}
           userInfo={user.userInfo}
           userId={user.userId}
+          profilePic={user.profilePic}
         />
       </div>
     </div>

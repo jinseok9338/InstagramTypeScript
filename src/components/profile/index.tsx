@@ -13,6 +13,7 @@ const Profile = ({
   userId,
   userInfo,
   username,
+  profilePic
 }: profileType): JSX.Element => {
   const reducer = (state: any, newState: any) => ({ ...state, ...newState });
   const initialState = {
@@ -29,6 +30,7 @@ const Profile = ({
     userId,
     userInfo,
     username,
+    profilePic,
   };
   const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
     reducer,

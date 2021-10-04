@@ -4,9 +4,10 @@ import Skeleton from 'react-loading-skeleton';
 interface UserPropTypes {
   username: string;
   fullName: string;
+  profilePic:string
 }
 
-const User = ({ username, fullName }: UserPropTypes): JSX.Element =>
+const User = ({ username, fullName,profilePic }: UserPropTypes): JSX.Element =>
   !username || !fullName ? (
     <Skeleton count={1} height={61} />
   ) : (
@@ -17,7 +18,7 @@ const User = ({ username, fullName }: UserPropTypes): JSX.Element =>
       <div className="flex items-center justify-between col-span-1">
         <img
           className="rounded-full w-16 flex mr-3"
-          src="/images/unknown.png"
+            src={profilePic}
           alt="/images/unknown.png"
         />
       </div>

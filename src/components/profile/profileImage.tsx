@@ -5,20 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import { uploadPictureTotheBucket } from '../../services/photos';
 import { profileType } from '../../services/types';
 import { firebase } from '../../lib/firebase';
+import ProfileImageUploadModal from './profileImageUpload';
 
 const ProfileImage = ({ profile }: { profile: profileType }) => {
-  const [file, setFile] = useState({} as File);
-  const inputFile = useRef(null);
-
-  const uploadProfilePic = async (file: File, profile: profileType) => {
-    const downloadURL = await uploadPictureTotheBucket(file);
-    await firebase
-      .firestore()
-      .collection('users')
-      .doc(profile.userId)
-      .update({ profilePic: downloadURL });
-      console.log('successfully updated the user ProfilePic');
-  };
+  const [visible, setVisible] = useState(false)
+  console.log(profile)
     
   // I need to make modal for the image upload maybe I can reuse the modal I made before and modify it.... Hmm..
   // Very poor choice for the resuability
@@ -34,18 +25,9 @@ const ProfileImage = ({ profile }: { profile: profileType }) => {
           <FontAwesomeIcon
             icon={faPlusCircle}
             className="right-0 left-auto cursor-pointer"
-            onClick={() => (inputFile?.current! as any).click()}
+            onClick={() => setVisible((prev)=>!prev)}
           />
-          <input
-            type="file"
-            id="file"
-            ref={inputFile}
-            style={{ display: 'none' }}
-            onChange={async(e) => {
-              setFile((e.target as any).files[0]);
-                
-            }}
-          />
+          <ProfileImageUploadModal visible={visible} setVisible={ setVisible}/>
         </div>
       ) : (
         <div className="h-40 w-40 flex">
@@ -57,21 +39,9 @@ const ProfileImage = ({ profile }: { profile: profileType }) => {
           <FontAwesomeIcon
             icon={faPlusCircle}
             className="right-0 left-auto cursor-pointer"
-            onClick={() => (inputFile?.current! as any).click()}
+              onClick={() => setVisible((prev) => !prev)}
           />
-          <input
-            type="file"
-            id="file"
-            ref={inputFile}
-            style={{ display: 'none' }}
-                          onChange={async (e) => {
-                              setFile((e.target as any).files[0]);
-                              while (Object.entries(file).length === 0) {
-                                  console.log("Not happening")
-                                  // No matter what I do it doesn't change the state.
-                              }
-                          }}
-          />
+            <ProfileImageUploadModal visible={visible} setVisible={setVisible} />
         </div>
       )}
     </>

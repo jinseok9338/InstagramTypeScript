@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 
 interface HeaderProptypes {
   username: string;
+  profilePic:string
 }
 
-const Header = ({ username }: HeaderProptypes): JSX.Element => (
+const Header = ({ username,profilePic }: HeaderProptypes): JSX.Element => (
   <div className="flex border-b border-gray-primary h-4 p-4 py-8">
     <div className="flex items-center">
       <Link to={`/p/${username}`} className="flex items-center">
         <img
           className="rounded-full h-8 w-8 flex mr-3"
           // This is clearly wrong because the image path is not static
-          src="/images/unknown.png"
+          src={profilePic}
           onError={(e) => {
             // to solve the not having the type problem
             let { onerror, src } = e.target as HTMLImageElement;

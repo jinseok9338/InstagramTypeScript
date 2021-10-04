@@ -94,7 +94,7 @@ const Header = ({ visible, setVisible }: HeaderProps) => {
                     <img
                       className="rounded-full h-8 w-8 flex"
                       //  TODO Need to change this to actual pic
-                      src="/images/unknown.png"
+                      src={user.profilePic}
                       // Need to add fallback img
                       alt=""
                     />
