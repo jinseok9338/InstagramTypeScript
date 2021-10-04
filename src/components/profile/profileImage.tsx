@@ -20,12 +20,8 @@ const ProfileImage = ({ profile }: { profile: profileType }) => {
       console.log('successfully updated the user ProfilePic');
   };
     
-    useEffect(() => {
-        if (Object.entries(file).length !== 0) {
-            uploadProfilePic(file, profile)
-        }
-    }, [file])
-
+  // I need to make modal for the image upload maybe I can reuse the modal I made before and modify it.... Hmm..
+  // Very poor choice for the resuability
   return (
     <>
       {profile.profilePic ? (

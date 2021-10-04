@@ -3,7 +3,6 @@
 // https://blog.logrocket.com/create-a-drag-and-drop-component-with-react-dropzone/
 
 import {
-  faClosedCaptioning,
   faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
