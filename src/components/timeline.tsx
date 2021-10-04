@@ -9,13 +9,13 @@ import Post from './post';
 export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
   const { posts } = usePhotos(user);
-
+console.log(posts, "posts")
   return (
     <>
       <div className="container col-span-2">
         {!posts ? (
           <Skeleton count={4} width={640} height={500} className="mb-5" />
-        ) : (
+        ) : posts.length !==0 ? (
           posts.map((post) => (
             <Post
               key={post?.postId!}
@@ -30,7 +30,7 @@ export default function Timeline() {
               userName={post.userName}
             />
           ))
-        )}
+        ):(<h1>There is no post Post a Pic or Follow Users</h1>)}
       </div>
     </>
   );

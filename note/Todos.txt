@@ -11,8 +11,6 @@
 // Need to refactor suggest profiles functions
 
 
-<Suggestions
-  userId={user?.userId!}
-  following={user?.following!}
-  loggedInUserDocId={user?.docId!}
-/>
+ 6. What's left
+ // Toggle follow and following
+ // Get suggested Profiles

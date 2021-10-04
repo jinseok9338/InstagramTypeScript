@@ -3,7 +3,7 @@ import { profileType, postType } from '../services/types';
 import { getPhotos } from '../services/photos';
 
 export default function usePhotos(user: profileType | null) {
-  const [posts, setPosts] = useState([{}] as postType[]);
+  const [posts, setPosts] = useState([] as postType[]);
 
   useEffect(() => {
     async function getTimelinePhotos() {

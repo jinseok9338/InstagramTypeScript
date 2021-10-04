@@ -1,27 +1,7 @@
 /* eslint-disable default-case */
-import Firebase from 'firebase';
-import { FirestoreDataType, profilestype } from './types';
 import { firebase } from '../lib/firebase';
-import { isFileImage } from '../utils/utils';
 
-// This file handles profile related functions
 
-const storage = firebase.storage().ref();
-const Firestore = firebase.firestore();
-
-// export async function getSuggestedProfiles(
-//   userId: string,
-//   following: string[]
-// ): Promise<profilestype> {
-//   const result = await firebase.firestore().collection('users').limit(10).get();
-
-//   return result.docs
-//     .map((user) => ({ ...user.data()}))
-//     .filter(
-//       (profile: FirestoreDataType) =>
-//         profile.userId !== userId && !following.includes(profile.userId)
-//     );
-// }
 
 export interface updatedProfileType {
   residence: string;
