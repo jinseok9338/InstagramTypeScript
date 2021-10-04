@@ -37,6 +37,7 @@ export type profileType = {
   followers?: any[]; // should have userIds
   fullName?: string;
   userInfo?: userInfoType;
+  profilePic?: string;
 };
 
 export type profilestype = profileType[];

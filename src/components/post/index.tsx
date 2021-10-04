@@ -40,11 +40,11 @@ const Post = ({
         />
         <Footer caption={post!} username={userName!} />
         <div className="p-4 pt-1 pb-4 ">
-        <Comments
-          docId={postId!}
-          comments={comments!} // Array // Display Name... conumdrum...
-          posted={posted!} // TimeStamp
-          commentInput={commentInput}
+          <Comments
+            docId={postId!}
+            comments={comments!} // Array // Display Name... conumdrum...
+            posted={posted!} // TimeStamp
+            commentInput={commentInput}
           />
         </div>
       </div>

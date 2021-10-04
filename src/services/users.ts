@@ -20,7 +20,6 @@ export async function doesUsernameExist(username: string) {
 }
 
 export async function getUserByUsername(username: string) {
-
   const result = await firebase
     .firestore()
     .collection('users')
@@ -33,19 +32,12 @@ export async function getUserByUsername(username: string) {
 }
 
 // get user from the firestore where userId === userId (passed from the auth)
-export async function getUserByUserId(
-  userId: string
-): Promise<profileType> {
+export async function getUserByUserId(userId: string): Promise<profileType> {
   const result = await firebase
     .firestore()
     .collection('users')
     .doc(userId)
     .get();
-  const user = result.data() as profileType
+  const user = result.data() as profileType;
   return user;
 }
-
-
-
-
-

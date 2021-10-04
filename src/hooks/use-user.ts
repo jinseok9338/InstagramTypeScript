@@ -17,5 +17,5 @@ export default function useUser(userId: string) {
     }
   }, [userId]);
 
-  return {user:activeUser}
+  return { user: activeUser };
 }

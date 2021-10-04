@@ -5,47 +5,29 @@ import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
 
 import UserContext from '../../context/user';
+import { profileType } from '../../services/types';
+import ProfileImage from './profileImage';
 
 interface HeaderPropTypes {
   photosCount: number;
   followerCount: number;
   setFollowerCount: ({ followerCount }: { followerCount: number }) => void;
-  profile: {
-    docId: string;
-    userId: string;
-    fullName: string;
-    username: string;
-    followers: string[];
-    following: string[];
-  };
+  profile: profileType;
 }
 
 const Header = ({
   photosCount,
   followerCount,
   setFollowerCount,
-  profile
+  profile,
 }: HeaderPropTypes) => {
   const { user: loggedInUser } = useContext(UserContext); // auth user
-  const { user } = useUser(loggedInUser?.uid); // with user Profile 
+  const { user } = useUser(loggedInUser?.uid); // with user Profile
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
-console.log(profile)
   return (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
       <div className="container flex justify-center items-center">
-        {profile.username ? (
-          <img
-            className="rounded-full h-40 w-40 flex"
-            src="/images/unknown.png"
-            alt={`${profile.fullName} profile picture`}
-          />
-        ) : (
-          <img
-            className="rounded-full h-40 w-40 flex"
-            src="/images/unknown.png"
-            alt={`${profile.fullName}'s profile picture`}
-          />
-        )}
+        <ProfileImage profile={profile} />
       </div>
       <div className="flex items-center justify-center flex-col col-span-2">
         <div className="container flex items-center">
@@ -73,14 +55,19 @@ console.log(profile)
                 {followerCount === 1 ? `follower` : `followers`}
               </p>
               <p className="mr-10">
-                <span className="font-bold">{profile.following?.length}</span> following
+                <span className="font-bold">{profile.following?.length}</span>{' '}
+                following
               </p>
             </>
           )}
         </div>
         <div className="container mt-4">
           <p className="font-medium">
-            {!profile.fullName ? <Skeleton count={1} height={24} /> : profile.fullName}
+            {!profile.fullName ? (
+              <Skeleton count={1} height={24} />
+            ) : (
+              profile.fullName
+            )}
           </p>
         </div>
       </div>

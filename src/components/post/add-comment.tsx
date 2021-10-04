@@ -28,7 +28,7 @@ const AddComment = ({
   const handleSubmitComment = (event: SyntheticEvent) => {
     event.preventDefault();
 
-    setComments([...comments, { displayName, comment }]); // Add display pic to the Comment and 
+    setComments([...comments, { displayName, comment }]); // Add display pic to the Comment and
     setComment('');
 
     return firebase

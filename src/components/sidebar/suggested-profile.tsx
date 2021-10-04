@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 interface SuggestedProfileProptypes {
   profileDocId: string;
   username: string;
@@ -22,7 +21,7 @@ const SuggestedProfile = ({
   async function handleFollowUser() {
     setFollowed(true);
   }
-  
+
   return !followed ? (
     <div className="flex flex-row items-center align-items justify-between">
       <div className="flex items-center justify-between">

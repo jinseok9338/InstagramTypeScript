@@ -5,9 +5,15 @@ import Photos from './photos';
 import { getUserPhotosByUsername } from '../../services/photos';
 import { postType, profileType } from '../../services/types';
 
-
-
-const Profile = ({emailAddress,followers,following,fullName,userId,userInfo,username}:profileType): JSX.Element => {
+const Profile = ({
+  emailAddress,
+  followers,
+  following,
+  fullName,
+  userId,
+  userInfo,
+  username,
+}: profileType): JSX.Element => {
   const reducer = (state: any, newState: any) => ({ ...state, ...newState });
   const initialState = {
     profile: {},
@@ -15,12 +21,19 @@ const Profile = ({emailAddress,followers,following,fullName,userId,userInfo,user
     followerCount: 0,
   };
 
-  const user = { emailAddress, followers, following, fullName, userId, userInfo, username}
+  const user = {
+    emailAddress,
+    followers,
+    following,
+    fullName,
+    userId,
+    userInfo,
+    username,
+  };
   const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
     reducer,
     initialState
   );
-  console.log(username)
 
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
@@ -29,13 +42,12 @@ const Profile = ({emailAddress,followers,following,fullName,userId,userInfo,user
         dispatch({
           profile: user,
           photosCollection: photos as postType[],
-          followerCount: followers?.length
+          followerCount: followers?.length,
         });
       }
-     // I don't understand dispatch
+      // I don't understand dispatch
     }
     getProfileInfoAndPhotos();
-      
   }, [username]);
 
   return (

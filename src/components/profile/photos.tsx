@@ -3,9 +3,7 @@
 import Skeleton from 'react-loading-skeleton';
 import { postType } from '../../services/types';
 
-
-
-const Photos = ({photos}: postType[]): JSX.Element => (
+const Photos = ({ photos }: any): JSX.Element => (
   <div className="h-16 border-t border-gray-primary mt-12 pt-4">
     <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
       {!photos ? (
@@ -13,7 +11,7 @@ const Photos = ({photos}: postType[]): JSX.Element => (
           <Skeleton count={12} width={320} height={400} />
         </>
       ) : photos.length > 0 ? (
-        photos.map((photo) => (
+        photos.map((photo: postType) => (
           <div key={photo.postId} className="relative group">
             <img src={photo.picURL} alt={photo.post} />
 

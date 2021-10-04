@@ -18,7 +18,7 @@ const Comments = ({
   commentInput,
 }: CommentsPropTypes) => {
   const [comments, setComments] = useState(allComments);
-  console.log(posted, new Date())
+  console.log(posted, new Date());
 
   return (
     <>

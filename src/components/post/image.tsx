@@ -8,11 +8,12 @@ interface ImagePropsTypes {
 
 const Image = ({ src, caption }: ImagePropsTypes) => (
   <>
-  {
-    !!src ?( <img src = { src } alt = { caption } className = "w-96 h-96" />): (
-        <Skeleton className="w-96 h-96" />
-  )}
- </>
+    {!!src ? (
+      <img src={src} alt={caption} className="w-96 h-96" />
+    ) : (
+      <Skeleton className="w-96 h-96" />
+    )}
+  </>
 );
 
 export default Image;

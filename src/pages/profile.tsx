@@ -6,8 +6,6 @@ import UserProfile from '../components/profile';
 import { getUserByUsername } from '../services/users';
 import { profileType } from '../services/types';
 
-
-
 const Profile = () => {
   const { username } = useParams<{ username: string }>();
   const [user, setUser] = useState<profileType>(null as unknown as profileType);
@@ -30,7 +28,15 @@ const Profile = () => {
     <div className="bg-gray-background">
       <Header />
       <div className="mx-auto max-w-screen-lg">
-        <UserProfile emailAddress={user.emailAddress} followers={user.followers} following={user.following} username={user.username} fullName={user.fullName} userInfo={user.userInfo} userId={user.userId} />
+        <UserProfile
+          emailAddress={user.emailAddress}
+          followers={user.followers}
+          following={user.following}
+          username={user.username}
+          fullName={user.fullName}
+          userInfo={user.userInfo}
+          userId={user.userId}
+        />
       </div>
     </div>
   ) : null;

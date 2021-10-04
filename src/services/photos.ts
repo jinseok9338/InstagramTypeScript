@@ -27,19 +27,16 @@ export async function getPhotos(
     .get();
 
   const userFollowedPhotos = result.docs.map((post) => ({
-    ...post.data()
-  }))
-
- 
-  
+    ...post.data(),
+  }));
 
   return userFollowedPhotos;
 }
 
 export async function getUserPhotosByUsername(username: string) {
-  console.log(username)
+  console.log(username);
   const user = await getUserByUsername(username);
-  console.log(user)
+  console.log(user);
   const result = await firebase
     .firestore()
     .collection('posts')
