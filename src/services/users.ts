@@ -4,9 +4,9 @@ import { profileType } from './types';
 export const PostAPost = async (
   collectionPath: string,
   data: any,
-  userId: string
+  postId: string
 ) => {
-  await firebase.firestore().collection(collectionPath).doc(userId).set(data);
+  await firebase.firestore().collection(collectionPath).doc(postId).set(data);
 };
 
 export async function doesUsernameExist(username: string) {
@@ -20,6 +20,7 @@ export async function doesUsernameExist(username: string) {
 }
 
 export async function getUserByUsername(username: string) {
+
   const result = await firebase
     .firestore()
     .collection('users')
@@ -28,8 +29,7 @@ export async function getUserByUsername(username: string) {
 
   return result.docs.map((item) => ({
     ...item.data(),
-    docId: item.id,
-  }));
+  }))[0];
 }
 
 // get user from the firestore where userId === userId (passed from the auth)

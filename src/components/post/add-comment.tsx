@@ -28,12 +28,12 @@ const AddComment = ({
   const handleSubmitComment = (event: SyntheticEvent) => {
     event.preventDefault();
 
-    setComments([...comments, { displayName, comment }]);
+    setComments([...comments, { displayName, comment }]); // Add display pic to the Comment and 
     setComment('');
 
     return firebase
       .firestore()
-      .collection('photos')
+      .collection('posts')
       .doc(docId)
       .update({
         comments: FieldValue.arrayUnion({ displayName, comment }),

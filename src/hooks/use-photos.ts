@@ -3,7 +3,7 @@ import { profileType, postType } from '../services/types';
 import { getPhotos } from '../services/photos';
 
 export default function usePhotos(user: profileType | null) {
-  const [photos, setPhotos] = useState([{}] as postType[]);
+  const [posts, setPosts] = useState([{}] as postType[]);
 
   useEffect(() => {
     async function getTimelinePhotos() {
@@ -18,12 +18,14 @@ export default function usePhotos(user: profileType | null) {
           (a, b) =>
             Number(b.posted?.toISOString) - Number(a.posted?.toISOString)
         );
-        setPhotos(followedUserPhotos);
+        setPosts(followedUserPhotos);
+      } else {
+        // Select Random photos with algorithm... but that's certainly not feasible, or maybe,,,
       }
     }
 
     getTimelinePhotos();
   }, [user?.userId]);
 
-  return { photos };
+  return { posts };
 }

@@ -3,20 +3,11 @@ import { useReducer, useEffect } from 'react';
 import Header from './header';
 import Photos from './photos';
 import { getUserPhotosByUsername } from '../../services/photos';
+import { postType, profileType } from '../../services/types';
 
-export interface ProfileProptypes {
-  user: {
-    dateCreated: number;
-    emailAddress: string;
-    followers: any[];
-    following: any[];
-    fullName: string;
-    userId: string;
-    username: string;
-  };
-}
 
-const Profile = ({ user }: ProfileProptypes): JSX.Element => {
+
+const Profile = ({emailAddress,followers,following,fullName,userId,userInfo,username}:profileType): JSX.Element => {
   const reducer = (state: any, newState: any) => ({ ...state, ...newState });
   const initialState = {
     profile: {},
@@ -24,22 +15,28 @@ const Profile = ({ user }: ProfileProptypes): JSX.Element => {
     followerCount: 0,
   };
 
+  const user = { emailAddress, followers, following, fullName, userId, userInfo, username}
   const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
     reducer,
     initialState
   );
+  console.log(username)
 
   useEffect(() => {
     async function getProfileInfoAndPhotos() {
-      const photos = await getUserPhotosByUsername(user.username);
-      dispatch({
-        profile: user,
-        photosCollection: photos,
-        followerCount: user.followers.length,
-      });
+      if (username) {
+        const photos = await getUserPhotosByUsername(username);
+        dispatch({
+          profile: user,
+          photosCollection: photos as postType[],
+          followerCount: followers?.length
+        });
+      }
+     // I don't understand dispatch
     }
     getProfileInfoAndPhotos();
-  }, [user.username]);
+      
+  }, [username]);
 
   return (
     <>

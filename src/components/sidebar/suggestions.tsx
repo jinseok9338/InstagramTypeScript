@@ -23,16 +23,18 @@ const Suggestions = ({
   const [suggestedUsers, setSuggestedUsers] = useState([] as profileType[])
 
   const { user: loggedInUser } = useContext(UserContext); // auth user
-  console.log(loggedInUser)
-  const {user} = useUser(loggedInUser?.uid); // with user Profile // This doesn't work why...??
-  console.log(user)
+ 
+  const {user} = useUser(loggedInUser?.uid); // with user Profile
+
   console.log(suggestedUsers, "suggestedUsers")
 
   useEffect(() => {
-    firebase.firestore().collection('users').where('userId', 'not-in', user.following).limit(5).get().then((res) => {
-      const usersProfile = res.docs.map((doc) => doc.data()) as profileType[]
-      setSuggestedUsers(usersProfile)
-    })
+    if (Object.entries(user).length !== 0) {
+      firebase.firestore().collection('users').where('userId', 'not-in', user.following).limit(5).get().then((res) => {
+        const usersProfile = res.docs.map((doc) => doc.data()).filter((doc)=>doc.userId !== user.userId) as profileType[]
+        setSuggestedUsers(usersProfile)
+      })
+    }
     // Do we need to retrigger this function when there was a following changed?
   }, [])
 

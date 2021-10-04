@@ -23,43 +23,31 @@ export async function getPhotos(
   const result = await firebase
     .firestore()
     .collection('posts')
-    .where('userId', 'in', following)
+    .where('userId', 'not-in', following)
     .get();
 
-  const userFollowedPhotos: FirestoreDataType[] = result.docs.map((post) => ({
-    ...post.data(),
-    docId: post.id,
-  }));
+  const userFollowedPhotos = result.docs.map((post) => ({
+    ...post.data()
+  }))
 
-  const photosWithUserDetails = await Promise.all(
-    userFollowedPhotos.map(async (post) => {
-      let userLikedPhoto = false;
-      if (post.likes.includes(userId)) {
-        userLikedPhoto = true;
-      }
-      // photo.userId = 2
-      const user = await getUserByUserId(post.userId);
-      // raphael
+ 
+  
 
-      const { username } = user;
-      return { username, ...post, userLikedPhoto };
-    })
-  );
-
-  return photosWithUserDetails;
+  return userFollowedPhotos;
 }
 
 export async function getUserPhotosByUsername(username: string) {
-  const user: FirestoreDataType[] = await getUserByUsername(username);
+  console.log(username)
+  const user = await getUserByUsername(username);
+  console.log(user)
   const result = await firebase
     .firestore()
-    .collection('photos')
-    .where('userId', '==', user[0].userId)
+    .collection('posts')
+    .where('userId', '==', user.userId)
     .get();
 
   return result.docs.map((item) => ({
     ...item.data(),
-    docId: item.id,
   }));
 }
 

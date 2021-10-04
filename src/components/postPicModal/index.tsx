@@ -98,7 +98,7 @@ const PostPicModal = ({ visible, setVisible }: PostPicModalProps) => {
                       userId: user.uid,
                       userName: user.displayName!,
                     };
-                    await PostAPost('posts', DataPacket, user.uid!);
+                    await PostAPost('posts', DataPacket, postId);
                     console.log('successfully Updated to the Firestore');
                     setLoading(false);
                     setVisible(false);

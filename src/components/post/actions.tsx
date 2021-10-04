@@ -23,7 +23,7 @@ const Actions = ({ docId, totalLikes, likedPhoto, handleFocus }: propTypes) => {
 
     await firebase
       .firestore()
-      .collection('photos')
+      .collection('posts')
       .doc(docId)
       .update({
         likes: toggleLiked

@@ -12,7 +12,7 @@ interface UserContextType {
 
 export default function Dashboard({ user: loggedInUser }: UserContextType) {
   const { user } = useUser(loggedInUser?.uid);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     document.title = 'Instagram';

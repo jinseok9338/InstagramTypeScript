@@ -9,15 +9,16 @@ import Post from './post';
 
 export default function Timeline() {
   const { user } = useContext(LoggedInUserContext);
-  const { photos } = usePhotos(user);
+  const { posts } = usePhotos(user);
 
+  
   return (
     <>
       <div className="container col-span-2">
-        {!photos ? (
+        {!posts ? (
           <Skeleton count={4} width={640} height={500} className="mb-5" />
         ) : (
-          photos.map((post) => (
+          posts.map((post) => (
             <Post
               key={post?.postId!}
               comments={post.comments}
@@ -27,7 +28,7 @@ export default function Timeline() {
               postId={post.postId}
               posted={post.posted}
               userId={post.userId}
-              userLikedPhoto={post.userLikedPhoto}
+              userLikedPhoto={post.likes?.includes(post?.userId!)}
               userName={post.userName}
             />
           ))
